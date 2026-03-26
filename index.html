@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prestige Tranquility Smashers</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={theme:{extend:{colors:{
+      brand:{50:'#f0f1ff',100:'#e0e1ff',200:'#c7c8fe',300:'#a5a7fc',400:'#8183f9',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},
+      court:{50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b'},
+      warm:{50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c'},
+    }}}}
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    *{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    body{font-family:'Inter',system-ui,-apple-system,sans-serif;letter-spacing:-.01em}
+    h1,h2,h3,.font-display{font-family:'Space Grotesk','Inter',sans-serif}
+    .page-bg{background:#f8f9fc;min-height:100vh;background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%,rgba(99,102,241,.06),transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%,rgba(16,185,129,.04),transparent)}
+    .header-glass{background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(30,41,59,.94));backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid rgba(99,102,241,.15);box-shadow:0 1px 30px rgba(0,0,0,.15)}
+    .card-glass{background:rgba(255,255,255,.92);backdrop-filter:blur(16px) saturate(1.2);border:1px solid rgba(255,255,255,.8);box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 24px rgba(0,0,0,.04)}
+    .card-hover{transition:all .25s cubic-bezier(.4,0,.2,1)}.card-hover:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.04)}
+    .shuttle-pattern{background-image:
+      radial-gradient(circle at 15% 85%,rgba(99,102,241,.05) 0%,transparent 45%),
+      radial-gradient(circle at 85% 15%,rgba(16,185,129,.05) 0%,transparent 45%),
+      radial-gradient(circle at 50% 50%,rgba(249,115,22,.03) 0%,transparent 60%)}
+
+    .hero-bg{background:linear-gradient(135deg,#0f172a 0%,#1e293b 40%,#334155 100%);position:relative;overflow:hidden}
+    .hero-bg::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=1920&q=80') center/cover no-repeat;opacity:.12;z-index:0}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(16,185,129,.15));z-index:0}
+    .hero-bg>*{position:relative;z-index:1}
+
+    .leaderboard-hero{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#3730a3 100%);position:relative}
+    .leaderboard-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1613918431703-aa50889e3be4?w=1920&q=80') center/cover no-repeat;opacity:.08}
+    .leaderboard-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(99,102,241,.15),rgba(168,85,247,.1))}
+    .leaderboard-hero>*{position:relative;z-index:1}
+
+    .tourney-hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 40%,#047857 100%);position:relative}
+    .tourney-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=1920&q=80') center/cover no-repeat;opacity:.1}
+    .tourney-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(16,185,129,.15),rgba(52,211,153,.1))}
+    .tourney-hero>*{position:relative;z-index:1}
+
+    .journal-hero{background:linear-gradient(135deg,#431407 0%,#7c2d12 40%,#c2410c 100%);position:relative}
+    .journal-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=1920&q=80') center/cover no-repeat;opacity:.07}
+    .journal-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(249,115,22,.15),rgba(251,146,60,.1))}
+    .journal-hero>*{position:relative;z-index:1}
+
+    .rr-hero{background:linear-gradient(135deg,#172554 0%,#1e3a8a 40%,#1d4ed8 100%);position:relative}
+    .rr-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=1920&q=80') center/cover no-repeat;opacity:.08}
+    .rr-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(59,130,246,.15),rgba(96,165,250,.1))}
+    .rr-hero>*{position:relative;z-index:1}
+
+    .match-bg{background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(248,250,252,.95));border:1px solid #e2e8f0}
+    .match-completed{background:linear-gradient(135deg,rgba(236,253,245,.97),rgba(209,250,229,.95));border:1.5px solid #6ee7b7}
+    .podium-gold{background:linear-gradient(160deg,#fef3c7 0%,#fde68a 50%,#fcd34d 100%);border:2px solid #f59e0b;box-shadow:0 8px 30px rgba(245,158,11,.2)}
+    .podium-silver{background:linear-gradient(160deg,#f1f5f9 0%,#e2e8f0 50%,#cbd5e1 100%);border:2px solid #94a3b8;box-shadow:0 8px 25px rgba(148,163,184,.15)}
+    .podium-bronze{background:linear-gradient(160deg,#ffedd5 0%,#fdba74 50%,#fb923c 100%);border:2px solid #f97316;box-shadow:0 8px 25px rgba(249,115,22,.15)}
+
+    .tab-active{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;box-shadow:0 2px 12px rgba(99,102,241,.35)}
+    .tab-inactive{background:rgba(255,255,255,.7);color:#64748b;border:1px solid rgba(226,232,240,.6)}.tab-inactive:hover{background:rgba(255,255,255,.95);color:#334155;border-color:#cbd5e1}
+    .round-active{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 2px 8px rgba(16,185,129,.3)}
+    .round-done{background:#d1fae5;color:#047857;border:1px solid #a7f3d0}.round-pending{background:#f1f5f9;color:#64748b;border:1px solid #e2e8f0}
+
+    .modal-overlay{background:rgba(15,23,42,.65);backdrop-filter:blur(8px) saturate(1.2)}
+    .fade-in{animation:fadeIn .3s cubic-bezier(.4,0,.2,1)}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .score-input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+    .winner-glow{box-shadow:0 0 25px rgba(16,185,129,.25),0 4px 15px rgba(16,185,129,.1)}
+
+    .challenge-btn{transition:all .2s cubic-bezier(.4,0,.2,1);cursor:pointer;border:2px solid #e2e8f0;border-radius:16px}
+    .challenge-btn:hover{border-color:#cbd5e1;transform:translateY(-1px)}
+    .challenge-btn.active{transform:scale(1.04);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+    .challenge-paya.active{border-color:#f87171;background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#991b1b}
+    .challenge-chai.active{border-color:#fbbf24;background:linear-gradient(135deg,#fffbeb,#fef3c7);color:#92400e}
+    .challenge-cash.active{border-color:#34d399;background:linear-gradient(135deg,#ecfdf5,#d1fae5);color:#166534}
+    .captain-badge{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid #fbbf24;font-size:11px}
+    .owes-card{background:linear-gradient(135deg,rgba(255,251,235,.95),rgba(254,243,199,.95));border:1.5px solid #fbbf24;box-shadow:0 2px 8px rgba(245,158,11,.08)}
+    .owes-settled{background:linear-gradient(135deg,rgba(236,253,245,.95),rgba(209,250,229,.95));border:1.5px solid #6ee7b7;opacity:.75}
+    .debt-owe{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1.5px solid #fca5a5;box-shadow:0 2px 8px rgba(252,165,165,.1)}
+    .debt-owed{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1.5px solid #6ee7b7;box-shadow:0 2px 8px rgba(110,231,183,.1)}
+
+    .avatar{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;color:#fff;text-transform:uppercase;flex-shrink:0;text-shadow:0 1px 2px rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .avatar-xs{width:24px;height:24px;font-size:10px}
+    .avatar-sm{width:32px;height:32px;font-size:12px}
+    .avatar-md{width:44px;height:44px;font-size:15px}
+    .avatar-lg{width:60px;height:60px;font-size:22px}
+    .avatar-xl{width:88px;height:88px;font-size:30px}
+    .profile-hero{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#3730a3 100%)}
+
+    .cash-input:focus{border-color:#34d399;box-shadow:0 0 0 3px rgba(52,211,153,.15)}
+    .rank-up{color:#059669;font-weight:700;font-size:11px}.rank-down{color:#dc2626;font-weight:700;font-size:11px}.rank-same{color:#94a3b8;font-size:11px}.rank-new{color:#7c3aed;font-weight:700;font-size:11px}
+    .move-badge{display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border-radius:9999px;font-size:10px;font-weight:700}
+    .move-badge-up{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
+    .move-badge-down{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5}
+    .move-badge-new{background:#f5f3ff;color:#7c3aed;border:1px solid #c4b5fd}
+
+    .journal-player-card{border-radius:16px;overflow:hidden;transition:all .2s ease}
+    .journal-player-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08)}
+    .journal-detail-row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:10px;font-size:12px}
+    .journal-detail-row:nth-child(even){background:rgba(0,0,0,.02)}
+
+    input[type="text"],input[type="number"],input[type="tel"],input[type="date"],select{transition:all .2s ease;font-family:'Inter',sans-serif}
+    input:focus,select:focus{box-shadow:0 0 0 3px rgba(99,102,241,.12);border-color:#a5b4fc}
+    button{transition:all .2s cubic-bezier(.4,0,.2,1);font-family:'Inter',sans-serif}
+    table{border-collapse:separate;border-spacing:0}
+    thead th{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:.06em}
+
+    ::-webkit-scrollbar{width:6px;height:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+  </style>
+</head>
+<body class="page-bg text-gray-900 antialiased">
+<div id="app">
+  <header class="header-glass sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex items-center justify-between h-16"><div class="flex items-center gap-3 cursor-pointer" onclick="navigate('dashboard')"><div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-lg shadow-lg shadow-brand-500/20">🏸</div><div class="font-display"><span class="text-lg font-bold text-white tracking-tight">Prestige Tranquility</span><span class="text-lg font-bold bg-gradient-to-r from-brand-300 to-brand-400 bg-clip-text text-transparent ml-1">Smashers</span></div></div><nav class="flex items-center gap-1.5 overflow-x-auto" id="nav-tabs"></nav></div></div></header>
+  <main id="main-content"></main>
+  <footer class="bg-gradient-to-b from-slate-900 to-slate-950 py-8 mt-12 border-t border-slate-800"><div class="max-w-7xl mx-auto px-4 text-center"><div class="flex items-center justify-center gap-2 mb-2"><div class="w-6 h-6 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-xs">🏸</div><p class="text-sm font-semibold text-slate-300 font-display">Prestige Tranquility Smashers</p></div><p class="text-xs text-slate-500">Doubles Challenge Badminton · 🍜 Paya Soup · ☕ Chai Bun Maska · 💰 Cash</p><div class="flex items-center justify-center gap-4 mt-3"><span class="text-xs text-slate-600">Built with ❤️ for smashers</span></div></div></footer>
+</div>
+<div id="modal-container"></div>
+
+<script>
+/* ═══ DATABASE — v5 avatars + cash INR ═══ */
+const DB_NAME='PTSmashersDB',DB_VER=5;let db=null;
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=e=>{const d=e.target.result;
+  if(!d.objectStoreNames.contains('players')){const s=d.createObjectStore('players',{keyPath:'id',autoIncrement:true});s.createIndex('name','name');s.createIndex('rating','rating')}
+  if(!d.objectStoreNames.contains('tournaments')){const s=d.createObjectStore('tournaments',{keyPath:'id',autoIncrement:true});s.createIndex('status','status')}
+  if(d.objectStoreNames.contains('matches'))d.deleteObjectStore('matches');
+  const ms=d.createObjectStore('matches',{keyPath:'id',autoIncrement:true});ms.createIndex('tournamentId','tournamentId');ms.createIndex('status','status');
+};r.onsuccess=e=>{db=e.target.result;res(db)};r.onerror=e=>rej(e.target.error)})}
+function dbAll(s){return new Promise((r,j)=>{const q=db.transaction(s,'readonly').objectStore(s).getAll();q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
+function dbGet(s,id){return new Promise((r,j)=>{const q=db.transaction(s,'readonly').objectStore(s).get(id);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
+function dbAdd(s,it){return new Promise((r,j)=>{const q=db.transaction(s,'readwrite').objectStore(s).add(it);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
+function dbPut(s,it){return new Promise((r,j)=>{const q=db.transaction(s,'readwrite').objectStore(s).put(it);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
+function dbDel(s,id){return new Promise((r,j)=>{const q=db.transaction(s,'readwrite').objectStore(s).delete(id);q.onsuccess=()=>r();q.onerror=()=>j(q.error)})}
+function dbIdx(s,idx,val){return new Promise((r,j)=>{const q=db.transaction(s,'readonly').objectStore(s).index(idx).getAll(val);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)})}
+
+/* ═══ ELO (doubles: avg team rating) ═══ */
+const K=32;
+function elo(rA,rB){return 1/(1+Math.pow(10,(rB-rA)/400))}
+function calcEloDoubles(wAvg,lAvg){const e=elo(wAvg,lAvg);return{wDelta:Math.round(K*(1-e)),lDelta:Math.round(K*(0-elo(lAvg,wAvg)))}}
+function tier(r){if(r>=1600)return{l:'Elite',c:'text-amber-700 bg-amber-100',e:'👑'};if(r>=1400)return{l:'Advanced',c:'text-purple-700 bg-purple-100',e:'💎'};if(r>=1250)return{l:'Intermediate',c:'text-blue-700 bg-blue-100',e:'⭐'};if(r>=1100)return{l:'Beginner',c:'text-emerald-700 bg-emerald-100',e:'🌱'};return{l:'Novice',c:'text-gray-600 bg-gray-100',e:'🔰'}}
+
+/* ═══ SCORING ═══ */
+function validateScore(s1,s2){
+  if(s1<0||s2<0)return{valid:false,msg:'Scores must be positive'};
+  if(s1===s2)return{valid:false,msg:'Cannot end in tie'};
+  const hi=Math.max(s1,s2),lo=Math.min(s1,s2);
+  if(hi<21)return{valid:false,msg:'Winner must score ≥21'};
+  if(hi===21&&lo<=19)return{valid:true};
+  if(hi===21&&lo===20)return{valid:false,msg:'At 20-20, win by 2 (e.g. 22-20)'};
+  if(hi>21&&hi<=30&&(hi-lo)===2)return{valid:true};
+  if(hi===30&&lo>=28)return{valid:true};
+  if(hi>30)return{valid:false,msg:'Max score is 30'};
+  return{valid:false,msg:'After 20-all, win by 2 (max 30)'}
+}
+
+/* ═══ HELPERS ═══ */
+function addDays(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r}
+function fmtDateShort(d){return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}
+function fmtWeekRange(s,e){return`${fmtDateShort(s)} – ${fmtDateShort(e)}`}
+function getWeekLabel(t){return(t.startDate&&t.endDate)?fmtWeekRange(t.startDate,t.endDate):(t.date||'')}
+function getDaysLeft(t){if(!t.endDate)return null;const d=Math.ceil((new Date(t.endDate).setHours(23,59,59,999)-Date.now())/864e5);return d>=0?d:null}
+function teamNames(ids,pm){return ids.map(id=>pm[id]?.name?.split(' ')[0]||'?').join(' & ')}
+function teamNamesFull(ids,pm){return ids.map(id=>pm[id]?.name||'?').join(' & ')}
+function teamAvgRating(ids,pm){const ratings=ids.map(id=>pm[id]?.rating||1200);return Math.round(ratings.reduce((a,b)=>a+b,0)/ratings.length)}
+function firstName(pm,id){return pm[id]?.name?.split(' ')[0]||'?'}
+
+/* ═══ AVATAR SYSTEM ═══ */
+const AVATAR_GRADIENTS=[
+  'linear-gradient(135deg,#667eea,#764ba2)','linear-gradient(135deg,#f093fb,#f5576c)',
+  'linear-gradient(135deg,#4facfe,#00f2fe)','linear-gradient(135deg,#43e97b,#38f9d7)',
+  'linear-gradient(135deg,#fa709a,#fee140)','linear-gradient(135deg,#a18cd1,#fbc2eb)',
+  'linear-gradient(135deg,#fccb90,#d57eeb)','linear-gradient(135deg,#e0c3fc,#8ec5fc)',
+  'linear-gradient(135deg,#f5576c,#ff6a88)','linear-gradient(135deg,#13547a,#80d0c7)',
+  'linear-gradient(135deg,#ff9a9e,#fad0c4)','linear-gradient(135deg,#a1c4fd,#c2e9fb)'
+];
+function getInitials(name){if(!name)return'?';const p=name.trim().split(/\s+/);return p.length>=2?(p[0][0]+p[p.length-1][0]).toUpperCase():name.substring(0,2).toUpperCase()}
+function avatarGradient(id){return AVATAR_GRADIENTS[(id||0)%AVATAR_GRADIENTS.length]}
+function avatarHTML(p,size='sm'){if(!p)return'';if(p.photo){const sz={'xs':24,'sm':32,'md':40,'lg':56,'xl':80}[size]||32;return`<img src="${p.photo}" class="avatar avatar-${size}" style="object-fit:cover;border:2px solid rgba(255,255,255,.4)" alt="${p.name||''}">`}const g=p.avatarColor||avatarGradient(p.id);const ini=getInitials(p.name);return`<div class="avatar avatar-${size}" style="background:${g}">${ini}</div>`}
+function avatarById(pm,id,size='sm'){return avatarHTML(pm[id],size)}
+
+/* ═══ CHALLENGE TYPES ═══ */
+const CHALLENGES={
+  paya_soup:{label:'Paya Soup',emoji:'🍜',color:'red'},
+  chai_bun_maska:{label:'Chai Bun Maska',emoji:'☕',color:'amber'},
+  cash:{label:'Cash',emoji:'💰',color:'green'}
+};
+function challengeBadge(type,cashAmt){const c=CHALLENGES[type];if(!c)return'';const lbl=type==='cash'&&cashAmt?`₹${cashAmt}`:c.label;return`<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${type==='paya_soup'?'bg-red-100 text-red-700':type==='chai_bun_maska'?'bg-amber-100 text-amber-700':'bg-green-100 text-green-700'}">${c.emoji} ${lbl}</span>`}
+function captainBadge(name){return`<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold captain-badge">👑 ${name}</span>`}
+
+/* ═══ OWES LOGIC (dual captain) ═══ */
+function getOwesFromMatches(matches,pm){
+  return matches.filter(m=>m.status==='completed'&&m.challenge&&m.winnerTeam&&m.team1&&m.team2).map(m=>{
+    try{
+      const wTeam=m.winnerTeam===1?m.team1:m.team2;
+      const lTeam=m.winnerTeam===1?m.team2:m.team1;
+      // Losing team's captain owes: if team1 wins → captain2 owes, if team2 wins → captain1 owes
+      const capId=m.winnerTeam===1?(m.captain2Id||null):(m.captain1Id||null);
+      if(!capId)return null;
+      return{matchId:m.id,captainId:capId,captainName:pm[capId]?.name||'?',challenge:m.challenge,
+        cashAmount:m.cashAmount||null,settled:m.oweSettled||false,
+        winNames:(wTeam||[]).map(id=>firstName(pm,id)).join(' & '),
+        loseNames:(lTeam||[]).map(id=>firstName(pm,id)).join(' & '),
+        winTeam:wTeam||[],loseTeam:lTeam||[]}
+    }catch(e){console.warn('Owes calc error for match',m.id,e);return null}
+  }).filter(Boolean);
+}
+
+/* ═══ ROUND ROBIN GENERATOR ═══ */
+function generateRRTeams(playerIds,pm){
+  // Snake draft: sort by rating desc, pair 1+N, 2+(N-1), etc.
+  const sorted=[...playerIds].sort((a,b)=>(pm[b]?.rating||1200)-(pm[a]?.rating||1200));
+  const teams=[];
+  const half=Math.floor(sorted.length/2);
+  for(let i=0;i<half;i++){
+    teams.push([sorted[i],sorted[sorted.length-1-i]]);
+  }
+  return teams;
+}
+function generateRRMatches(teams){
+  const matches=[];
+  for(let i=0;i<teams.length;i++){
+    for(let j=i+1;j<teams.length;j++){
+      matches.push({team1:teams[i],team2:teams[j]});
+    }
+  }
+  return matches;
+}
+
+/* ═══ SEED ═══ */
+async function seed(){const p=await dbAll('players');if(p.length)return;
+  const seeds=[{name:'Rahul Sharma',rating:1350},{name:'Priya Patel',rating:1280},{name:'Amit Kumar',rating:1420},{name:'Sneha Reddy',rating:1200},{name:'Vikram Singh',rating:1310},{name:'Ananya Iyer',rating:1250},{name:'Karthik Nair',rating:1380},{name:'Meera Joshi',rating:1190},{name:'Arjun Das',rating:1330},{name:'Nisha Gupta',rating:1270}];
+  for(let i=0;i<seeds.length;i++){const s=seeds[i];
+    await dbAdd('players',{...s,avatarColor:AVATAR_GRADIENTS[i%AVATAR_GRADIENTS.length],bio:'',phone:'',wins:0,losses:0,matchesPlayed:0,createdAt:new Date().toISOString()})}
+}
+
+/* ═══ NAV — 6 tabs ═══ */
+let page='dashboard',tid=null,aRound=1;
+const tabs=[{id:'dashboard',l:'Home',i:'📊'},{id:'players',l:'Players',i:'👥'},{id:'tournaments',l:'Challenges',i:'🏆'},{id:'roundrobin',l:'Round Robin',i:'🔄'},{id:'journal',l:'Journal',i:'📋'},{id:'leaderboard',l:'Leaderboard',i:'🥇'}];
+function navigate(p,x){page=p;if(x!==undefined)tid=x;aRound=1;rNav();rPage()}
+function rNav(){document.getElementById('nav-tabs').innerHTML=tabs.map(t=>`<button onclick="navigate('${t.id}')" class="flex items-center gap-1 px-2.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${page===t.id?'tab-active':'tab-inactive'}">${t.i} <span class="hidden md:inline">${t.l}</span></button>`).join('')}
+async function rPage(){closeModal();const m=document.getElementById('main-content');try{await({dashboard:rDash,players:rPlayers,tournaments:rTournaments,'tournament-detail':rTDetail,leaderboard:rLeader,journal:rJournal,roundrobin:rRoundRobin,'rr-detail':rRRDetail})[page](m)}catch(err){console.error('Page render error:',err);m.innerHTML=`<div class="max-w-2xl mx-auto p-8 text-center"><p class="text-4xl mb-4">⚠️</p><p class="text-lg font-bold text-red-600">Something went wrong</p><p class="text-sm text-slate-500 mt-2">${err.message}</p><button onclick="navigate('dashboard')" class="mt-4 bg-brand-600 text-white px-6 py-2 rounded-xl font-semibold">Go Home</button></div>`}}
+function closeModal(){document.getElementById('modal-container').innerHTML=''}
+function showModal(h){document.getElementById('modal-container').innerHTML=`<div class="fixed inset-0 modal-overlay flex items-center justify-center z-50 fade-in p-4" onclick="closeModal()"><div class="bg-white rounded-2xl p-6 w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">${h}</div></div>`}
+function showWideModal(h){document.getElementById('modal-container').innerHTML=`<div class="fixed inset-0 modal-overlay flex items-center justify-center z-50 fade-in p-4" onclick="closeModal()"><div class="bg-white rounded-2xl p-6 w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">${h}</div></div>`}
+
+/* ═══ DASHBOARD ═══ */
+async function rDash(el){
+  const[ps,ts,ms]=await Promise.all([dbAll('players'),dbAll('tournaments'),dbAll('matches')]);
+  const done=ms.filter(m=>m.status==='completed').length,top=[...ps].sort((a,b)=>b.rating-a.rating).slice(0,5);
+  const act=ts.find(t=>t.status==='in_progress'&&t.format!=='round_robin'&&t.playerIds);
+  const pm=Object.fromEntries(ps.map(p=>[p.id,p]));
+  const dl=act?getDaysLeft(act):null;
+  const rec=ms.filter(m=>m.status==='completed').slice(-5).reverse();
+  const owes=getOwesFromMatches(ms,pm).filter(o=>!o.settled);
+
+  el.innerHTML=`
+  <div class="hero-bg py-12 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto text-center"><h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Prestige Tranquility <span class="text-brand-400">Smashers</span></h1><p class="text-lg text-slate-300 mt-3">🍜 Paya Soup &bull; ☕ Chai Bun Maska &bull; 💰 Cash — Challenge Doubles!</p></div></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 shuttle-pattern">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">${[{l:'Players',v:ps.length,i:'👥',g:'from-blue-500 to-blue-600'},{l:'Tournaments',v:ts.length,i:'🏆',g:'from-amber-500 to-amber-600'},{l:'Matches',v:ms.length,i:'🏸',g:'from-emerald-500 to-emerald-600'},{l:'Open Debts',v:owes.length,i:'🍜',g:'from-red-500 to-orange-500'}].map(s=>`<div class="card-glass card-hover rounded-2xl shadow-sm p-5 flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-br ${s.g} flex items-center justify-center text-xl text-white shadow-md">${s.i}</div><div><p class="text-2xl font-bold text-slate-800">${s.v}</p><p class="text-sm text-slate-500">${s.l}</p></div></div>`).join('')}</div>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card-glass rounded-2xl shadow-sm p-6 card-hover"><h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-sm">🔥</span> Active Tournament</h2>${act?`<p class="text-xl font-bold text-brand-700">${act.name}</p><p class="text-sm text-slate-500 mt-1">👥 ${act.playerIds.length} players &bull; 📅 ${getWeekLabel(act)}</p>${dl!==null?`<div class="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${dl<=1?'bg-red-100 text-red-700':'bg-blue-100 text-blue-700'}">⏳ ${dl===0?'Ends today!':dl===1?'1 day left':`${dl} days left`}</div>`:''}<button onclick="navigate('tournament-detail',${act.id})" class="mt-4 w-full bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 shadow-md">View Tournament →</button>`:`<div class="text-center py-8"><p class="text-5xl mb-3">🏆</p><p class="text-slate-400 mb-4">No active tournament</p><button onclick="navigate('tournaments')" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 shadow-md">Create One →</button></div>`}</div>
+    <div class="card-glass rounded-2xl shadow-sm p-6 card-hover"><h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center text-white text-sm">⭐</span> Top Players</h2>${top.length?`<div class="space-y-3">${top.map((p,i)=>{const t=tier(p.rating);return`<div class="flex items-center justify-between cursor-pointer hover:bg-slate-50 rounded-lg px-1 py-0.5" onclick="showProfile(${p.id})"><div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500">${i+1}</span>${avatarHTML(p,'xs')}<span class="font-medium text-slate-700">${p.name}</span></div><div class="flex items-center gap-2"><span class="text-xs">${t.e}</span><span class="font-bold text-brand-700">${p.rating}</span></div></div>`}).join('')}</div>`:'<p class="text-slate-400 text-center py-8">No players yet</p>'}<button onclick="navigate('leaderboard')" class="text-brand-600 text-sm mt-4 inline-block hover:underline font-medium">Full leaderboard →</button></div>
+  </div>
+  ${owes.length?`<div class="card-glass rounded-2xl shadow-sm p-6"><h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white text-sm">⚠️</span> Open Debts (${owes.length})</h2><div class="space-y-2">${owes.slice(0,5).map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount:ch?.label;return`<div class="owes-card rounded-xl p-3"><div class="flex items-center justify-between"><div><p class="text-sm font-bold text-amber-900">👑 ${o.captainName} owes ${ch?.emoji} ${lbl}</p><p class="text-xs text-amber-700">→ to ${o.winNames}</p></div><button onclick="settleOwe(${o.matchId})" class="bg-green-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600">✅ Settle</button></div></div>`}).join('')}</div>${owes.length>5?`<button onclick="navigate('journal')" class="text-brand-600 text-sm mt-3 inline-block hover:underline font-medium">See all in Journal →</button>`:''}</div>`:''
+  }
+  <div class="card-glass rounded-2xl shadow-sm p-6"><h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center text-white text-sm">🕐</span> Recent Matches</h2>${rec.length?`<div class="space-y-3">${rec.map(m=>{const t1=teamNames(m.team1||[],pm),t2=teamNames(m.team2||[],pm),w=m.winnerTeam===1;const cap1=firstName(pm,m.captain1Id),cap2=firstName(pm,m.captain2Id);return`<div class="py-3 border-b border-slate-100 last:border-0"><div class="flex items-center justify-between"><div class="flex-1"><div class="flex items-center gap-2 text-sm flex-wrap"><span class="${w?'font-bold text-court-700':'text-slate-600'}">${t1}</span><span class="text-slate-300 text-xs">vs</span><span class="${!w?'font-bold text-court-700':'text-slate-600'}">${t2}</span></div><div class="flex items-center gap-1.5 mt-1">${m.challenge?challengeBadge(m.challenge,m.cashAmount):''}<span class="text-xs text-amber-600 font-medium">👑 ${cap1} vs 👑 ${cap2}</span></div></div><span class="font-mono text-sm font-bold px-3 py-1 rounded-lg bg-court-50 text-court-700 shrink-0">${m.team1Score} – ${m.team2Score}</span></div></div>`}).join('')}</div>`:'<p class="text-slate-400 text-center py-8">No matches played yet!</p>'}</div>
+  </div>`
+}
+
+/* ═══ PLAYERS ═══ */
+async function rPlayers(el){
+  const ps=(await dbAll('players')).sort((a,b)=>b.rating-a.rating);
+  el.innerHTML=`<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 shuttle-pattern">
+  <div class="flex items-center justify-between"><div><h1 class="text-3xl font-bold text-slate-800">👥 Players</h1><p class="text-slate-500 mt-1">${ps.length} registered smashers</p></div><button onclick="showAddP()" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold hover:opacity-90 shadow-md">+ Add Player</button></div>
+  <input type="text" id="ps" placeholder="Search players..." oninput="filterP()" class="w-full max-w-sm px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 outline-none bg-white shadow-sm"/>
+  <div class="card-glass rounded-2xl shadow-sm overflow-hidden"><table class="w-full"><thead class="bg-slate-50 border-b"><tr><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">#</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Player</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Rating</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Tier</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">W/L</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Played</th><th class="text-right px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Actions</th></tr></thead>
+  <tbody class="divide-y divide-slate-100">${ps.map((p,i)=>{const t=tier(p.rating);return`<tr class="hover:bg-slate-50/80 pr cursor-pointer" data-n="${p.name.toLowerCase()}" onclick="showProfile(${p.id})"><td class="px-6 py-4 text-sm text-slate-400 font-mono">${i+1}</td><td class="px-6 py-4"><div class="flex items-center gap-3">${avatarHTML(p,'sm')}<div><p class="font-semibold text-slate-700">${p.name}</p>${p.bio?`<p class="text-xs text-slate-400 truncate max-w-[150px]">${p.bio}</p>`:''}</div></div></td><td class="px-6 py-4"><span class="text-lg font-bold text-brand-700">${p.rating}</span></td><td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${t.c}">${t.e} ${t.l}</span></td><td class="px-6 py-4 text-center text-sm"><span class="text-court-700 font-semibold">${p.wins}</span><span class="text-slate-300 mx-1">/</span><span class="text-red-500 font-semibold">${p.losses}</span></td><td class="px-6 py-4 text-center text-sm text-slate-600">${p.matchesPlayed}</td><td class="px-6 py-4 text-right"><button onclick="showEditP(${p.id})" class="text-brand-600 hover:text-brand-800 text-sm font-medium mr-3">Edit</button><button onclick="delP(${p.id})" class="text-red-500 hover:text-red-700 text-sm font-medium">Delete</button></td></tr>`}).join('')}</tbody></table>${ps.length===0?'<p class="text-slate-400 text-center py-12">No players yet!</p>':''}</div></div>`
+}
+function filterP(){const q=document.getElementById('ps').value.toLowerCase();document.querySelectorAll('.pr').forEach(r=>{r.style.display=r.dataset.n.includes(q)?'':'none'})}
+function showAddP(){showModal(`<h2 class="text-xl font-bold mb-4">Add New Smasher</h2><form onsubmit="addP(event)" class="space-y-4"><div class="text-center"><div id="addPhotoPreview" class="mx-auto w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center text-3xl text-slate-300 mb-2 overflow-hidden">📷</div><label class="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-700 rounded-xl text-sm font-semibold cursor-pointer hover:bg-brand-100 border border-brand-200"><span>📸 Upload Photo</span><input type="file" id="pPhoto" accept="image/*" class="hidden" onchange="previewPhoto(this,'addPhotoPreview')"/></label><p class="text-xs text-slate-400 mt-1">Optional · Max 500KB</p></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Name *</label><input type="text" id="pn" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" required autofocus/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Phone</label><input type="tel" id="pph" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="+91 ..."/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Bio</label><input type="text" id="pbio" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="Smash enthusiast..." maxlength="100"/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Initial Rating</label><input type="number" id="pr" value="1200" min="800" max="2400" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl"/></div><div class="flex gap-3 pt-2"><button type="submit" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1">Add Player</button><button type="button" onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Cancel</button></div></form>`)}
+let _pendingPhoto=null;
+function previewPhoto(input,previewId){
+  const file=input.files[0];if(!file)return;
+  if(file.size>2*1024*1024){alert('Image too large. Max 2MB.');input.value='';return}
+  compressImage(file,200,0.7).then(dataUrl=>{
+    _pendingPhoto=dataUrl;
+    const el=document.getElementById(previewId);
+    if(el)el.innerHTML=`<img src="${dataUrl}" class="w-full h-full object-cover rounded-full"/>`;
+  });
+}
+function compressImage(file,maxDim,quality){
+  return new Promise(resolve=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const canvas=document.createElement('canvas');
+        let w=img.width,h=img.height;
+        if(w>h){if(w>maxDim){h=Math.round(h*maxDim/w);w=maxDim}}else{if(h>maxDim){w=Math.round(w*maxDim/h);h=maxDim}}
+        canvas.width=w;canvas.height=h;
+        const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL('image/jpeg',quality));
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+async function addP(e){e.preventDefault();const cnt=await dbAll('players');await dbAdd('players',{name:document.getElementById('pn').value.trim(),phone:document.getElementById('pph').value.trim(),bio:document.getElementById('pbio').value.trim(),photo:_pendingPhoto||null,avatarColor:AVATAR_GRADIENTS[cnt.length%AVATAR_GRADIENTS.length],rating:parseInt(document.getElementById('pr').value)||1200,wins:0,losses:0,matchesPlayed:0,createdAt:new Date().toISOString()});_pendingPhoto=null;closeModal();rPage()}
+async function showEditP(id){const p=await dbGet('players',id);_pendingPhoto=p.photo||null;showModal(`<h2 class="text-xl font-bold mb-4">Edit Player</h2><div class="text-center mb-4"><div id="editPhotoPreview" class="mx-auto w-20 h-20 rounded-full overflow-hidden flex items-center justify-center">${p.photo?`<img src="${p.photo}" class="w-full h-full object-cover rounded-full"/>`:avatarHTML(p,'xl')}</div><div class="flex items-center justify-center gap-2 mt-2"><label class="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-50 text-brand-700 rounded-lg text-xs font-semibold cursor-pointer hover:bg-brand-100 border border-brand-200"><span>📸 ${p.photo?'Change':'Upload'} Photo</span><input type="file" id="pPhoto" accept="image/*" class="hidden" onchange="previewPhoto(this,'editPhotoPreview')"/></label>${p.photo?`<button type="button" onclick="_pendingPhoto=null;document.getElementById('editPhotoPreview').innerHTML='${avatarHTML(p,'xl').replace(/'/g,"\\'")}';" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-xs font-semibold hover:bg-red-100 border border-red-200">🗑️ Remove</button>`:''}</div></div><form onsubmit="updP(event,${id})" class="space-y-4"><div><label class="block text-sm font-medium text-slate-700 mb-1">Name *</label><input type="text" id="pn" value="${p.name}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" required/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Phone</label><input type="tel" id="pph" value="${p.phone||''}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="+91 ..."/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Bio</label><input type="text" id="pbio" value="${p.bio||''}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="Smash enthusiast..." maxlength="100"/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">Rating</label><input type="number" id="pr" value="${p.rating}" min="800" max="2400" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl"/></div><div class="flex gap-3 pt-2"><button type="submit" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1">Save</button><button type="button" onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Cancel</button></div></form>`)}
+async function updP(e,id){e.preventDefault();const p=await dbGet('players',id);p.name=document.getElementById('pn').value.trim();p.phone=document.getElementById('pph').value.trim();p.bio=document.getElementById('pbio').value.trim();p.photo=_pendingPhoto||null;p.rating=parseInt(document.getElementById('pr').value)||p.rating;if(!p.avatarColor)p.avatarColor=AVATAR_GRADIENTS[(p.id||0)%AVATAR_GRADIENTS.length];await dbPut('players',p);_pendingPhoto=null;closeModal();rPage()}
+async function delP(id){if(!confirm('Delete this player?'))return;await dbDel('players',id);rPage()}
+
+/* ═══ PLAYER PROFILE ═══ */
+async function showProfile(id){
+  const p=await dbGet('players',id);if(!p)return;
+  const ms=await dbAll('matches');const ps=await dbAll('players');
+  const pm=Object.fromEntries(ps.map(x=>[x.id,x]));
+  const t=tier(p.rating);
+  const pms=ms.filter(m=>m.status==='completed'&&((m.team1||[]).includes(id)||(m.team2||[]).includes(id)));
+  const wins=pms.filter(m=>{const wt=m.winnerTeam===1?m.team1:m.team2;return(wt||[]).includes(id)});
+  const losses=pms.filter(m=>{const lt=m.winnerTeam===1?m.team2:m.team1;return(lt||[]).includes(id)});
+  const owes=getOwesFromMatches(ms,pm).filter(o=>o.captainId===id&&!o.settled);
+  const owed=getOwesFromMatches(ms,pm).filter(o=>(o.winTeam||[]).includes(id)&&!o.settled);
+  const winPct=pms.length?Math.round(wins.length/pms.length*100):0;
+  showWideModal(`
+    <div class="text-center mb-6"><div class="flex justify-center mb-3 relative"><div class="relative group">${avatarHTML(p,'xl')}<label class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" title="Change photo"><span class="text-white text-lg">📷</span><input type="file" accept="image/*" class="hidden" onchange="uploadProfilePhoto(${p.id},this)"/></label></div></div>
+    <h2 class="text-2xl font-extrabold text-slate-800">${p.name}</h2>
+    ${p.bio?`<p class="text-sm text-slate-500 mt-1">${p.bio}</p>`:''}
+    ${p.phone?`<p class="text-xs text-slate-400 mt-1">📱 ${p.phone}</p>`:''}
+    <div class="flex items-center justify-center gap-2 mt-2"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold ${t.c}">${t.e} ${t.l}</span><span class="text-2xl font-extrabold text-brand-700">${p.rating}</span></div></div>
+    <div class="grid grid-cols-4 gap-3 mb-6">${[{l:'Played',v:pms.length,c:'bg-blue-50 text-blue-700'},{l:'Wins',v:wins.length,c:'bg-green-50 text-green-700'},{l:'Losses',v:losses.length,c:'bg-red-50 text-red-700'},{l:'Win%',v:winPct+'%',c:'bg-purple-50 text-purple-700'}].map(s=>`<div class="rounded-xl p-3 text-center ${s.c}"><p class="text-xl font-extrabold">${s.v}</p><p class="text-xs font-medium">${s.l}</p></div>`).join('')}</div>
+    ${owes.length?`<div class="mb-4"><p class="text-sm font-bold text-red-600 mb-2">⚠️ Owes (${owes.length})</p><div class="space-y-1">${owes.map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount:ch?.label;return`<div class="bg-red-50 rounded-lg px-3 py-2 text-xs"><span class="font-bold">${ch?.emoji} ${lbl}</span> → ${o.winNames}</div>`}).join('')}</div></div>`:''}
+    ${owed.length?`<div class="mb-4"><p class="text-sm font-bold text-green-600 mb-2">✅ Owed by others (${owed.length})</p><div class="space-y-1">${owed.map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount:ch?.label;return`<div class="bg-green-50 rounded-lg px-3 py-2 text-xs"><span class="font-bold">${ch?.emoji} ${lbl}</span> from 👑 ${o.captainName}</div>`}).join('')}</div></div>`:''}
+    <div class="mb-4"><p class="text-sm font-bold text-slate-700 mb-2">🕐 Recent Matches</p>${pms.length?`<div class="space-y-1.5 max-h-48 overflow-y-auto">${pms.slice(-8).reverse().map(m=>{const t1=teamNames(m.team1||[],pm),t2=teamNames(m.team2||[],pm);const w=m.winnerTeam===1?(m.team1||[]).includes(id):(m.team2||[]).includes(id);return`<div class="flex items-center justify-between py-2 border-b border-slate-100 last:border-0"><div class="flex items-center gap-2 text-xs"><span class="${w?'text-green-600 font-bold':'text-red-500 font-bold'}">${w?'W':'L'}</span><span>${t1} vs ${t2}</span>${m.challenge?challengeBadge(m.challenge,m.cashAmount):''}</div><span class="font-mono text-xs font-bold text-slate-600">${m.team1Score}-${m.team2Score}</span></div>`}).join('')}</div>`:'<p class="text-xs text-slate-400 text-center py-4">No matches yet</p>'}</div>
+    <div class="flex gap-3"><button onclick="showEditP(${id})" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1">✏️ Edit</button>${p.photo?`<button onclick="removeProfilePhoto(${id})" class="bg-red-50 text-red-600 px-4 py-2.5 rounded-xl font-semibold hover:bg-red-100 border border-red-200">🗑️ Photo</button>`:''}<button onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Close</button></div>
+  `);
+}
+
+async function uploadProfilePhoto(id,input){
+  const file=input.files[0];if(!file)return;
+  if(file.size>2*1024*1024){alert('Image too large. Max 2MB.');return}
+  const dataUrl=await compressImage(file,200,0.7);
+  const p=await dbGet('players',id);p.photo=dataUrl;await dbPut('players',p);
+  closeModal();showProfile(id);
+}
+async function removeProfilePhoto(id){
+  const p=await dbGet('players',id);p.photo=null;await dbPut('players',p);
+  closeModal();showProfile(id);
+}
+
+/* ═══ TOURNAMENTS (Challenge) ═══ */
+async function rTournaments(el){
+  const ts=(await dbAll('tournaments')).filter(t=>t.format!=='round_robin').sort((a,b)=>(b.startDate||'').localeCompare(a.startDate||''));
+  const sb={draft:'📝 Draft|bg-slate-100 text-slate-600',in_progress:'🔥 Live|bg-emerald-100 text-emerald-700',completed:'✅ Done|bg-blue-100 text-blue-700'};
+  el.innerHTML=`<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 shuttle-pattern">
+  <div class="flex items-center justify-between"><div><h1 class="text-3xl font-bold text-slate-800">🏆 Challenge Tournaments</h1><p class="text-slate-500 mt-1">${ts.length} week tournaments</p></div><button onclick="showNewT()" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold hover:opacity-90 shadow-md">+ New Tournament</button></div>
+  <div class="space-y-4">${ts.map(t=>{const[lb,cl]=(sb[t.status]||sb.draft).split('|');const wl=getWeekLabel(t);const dr=getDaysLeft(t);return`<div class="card-glass card-hover rounded-2xl shadow-sm p-6 flex items-center justify-between"><div><div class="flex items-center gap-3 flex-wrap"><h3 class="text-lg font-bold text-slate-800">${t.name}</h3><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${cl}">${lb}</span><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-700">🏸 Doubles</span>${t.status==='in_progress'&&dr!==null?`<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${dr<=1?'bg-red-100 text-red-700':'bg-blue-100 text-blue-700'}">⏳ ${dr===0?'Ends today':dr===1?'1 day':dr+' days'}</span>`:''}</div><p class="text-sm text-slate-500 mt-1">📅 ${wl} &bull; 👥 ${t.playerIds.length} players</p></div><div class="flex items-center gap-2"><button onclick="navigate('tournament-detail',${t.id})" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90">View →</button><button onclick="delT(${t.id})" class="bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-600">🗑️</button></div></div>`}).join('')}${ts.length===0?'<div class="card-glass rounded-2xl shadow-sm p-16 text-center"><p class="text-5xl mb-4">🏆</p><p class="text-lg text-slate-400">No tournaments yet</p></div>':''}</div></div>`
+}
+async function showNewT(){
+  const ps=(await dbAll('players')).sort((a,b)=>a.name.localeCompare(b.name)),today=new Date().toISOString().split('T')[0],endDef=addDays(new Date(),6).toISOString().split('T')[0];
+  showModal(`<h2 class="text-xl font-bold mb-4">🏆 New Challenge Tournament</h2><form onsubmit="createT(event)" class="space-y-4"><div><label class="block text-sm font-medium text-slate-700 mb-1">Tournament Name *</label><input type="text" id="tn" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="Week 1 Doubles Smash" required autofocus/></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium text-slate-700 mb-1">Start Date</label><input type="date" id="td-start" value="${today}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" required onchange="syncEnd()"/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">End Date</label><input type="date" id="td-end" value="${endDef}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-slate-50" readonly/><p class="text-xs text-slate-400 mt-1">Auto: +7 days</p></div></div><div><div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-slate-700">Players (<span id="tc">0</span> selected)</label><button type="button" onclick="togAll()" class="text-xs text-brand-600 hover:underline font-medium">Toggle All</button></div>${ps.length===0?'<p class="text-sm text-slate-400">Add players first.</p>':`<div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto border border-slate-200 rounded-xl p-3">${ps.map(p=>`<label class="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-slate-50"><input type="checkbox" class="pcb rounded accent-brand-600" value="${p.id}" onchange="updTC()"/><div><p class="text-sm font-medium">${p.name}</p><p class="text-xs text-slate-400">${p.rating} ELO</p></div></label>`).join('')}</div>`}<p id="ti" class="text-xs text-slate-500 mt-2">Need ≥ 4 players for doubles</p></div><div class="flex gap-3 pt-2"><button type="submit" id="tsbtn" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1 disabled:opacity-40" disabled>Create</button><button type="button" onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Cancel</button></div></form>`)
+}
+function syncEnd(){const s=document.getElementById('td-start').value;if(s)document.getElementById('td-end').value=addDays(new Date(s),6).toISOString().split('T')[0]}
+function togAll(){const c=document.querySelectorAll('.pcb'),a=[...c].every(x=>x.checked);c.forEach(x=>x.checked=!a);updTC()}
+function updTC(){const n=document.querySelectorAll('.pcb:checked').length;document.getElementById('tc').textContent=n;document.getElementById('tsbtn').disabled=n<4;document.getElementById('ti').textContent=n>=4?`✅ ${n} players — Each team picks a captain per match`:'Need ≥ 4 players for doubles'}
+async function createT(e){e.preventDefault();const nm=document.getElementById('tn').value.trim(),sd=document.getElementById('td-start').value,ed=document.getElementById('td-end').value,ids=[...document.querySelectorAll('.pcb:checked')].map(c=>+c.value);if(ids.length<4)return;await dbAdd('tournaments',{name:nm,date:sd,startDate:sd,endDate:ed,status:'draft',playerIds:ids,format:'doubles',totalRounds:1,createdAt:new Date().toISOString()});const tId=(await dbAll('tournaments')).slice(-1)[0].id;closeModal();navigate('tournament-detail',tId)}
+async function delT(id){
+  const t=await dbGet('tournaments',id);if(!t)return;
+  const ms=await dbIdx('matches','tournamentId',id);
+  const completed=ms.filter(m=>m.status==='completed');
+  const msg=completed.length?`Delete "${t.name}"?\n\n⚠️ ${completed.length} completed match(es) will be deleted.\nPlayer ELO ratings will be REVERTED for these matches.\n\nThis cannot be undone!`:`Delete "${t.name}" and its ${ms.length} match(es)?`;
+  if(!confirm(msg))return;
+  // Revert ELO for completed matches
+  const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  for(const m of completed){
+    const wTeam=m.winnerTeam===1?m.team1:m.team2,lTeam=m.winnerTeam===1?m.team2:m.team1;
+    const{wDelta,lDelta}=calcEloDoubles(teamAvgRating(wTeam,pm),teamAvgRating(lTeam,pm));
+    for(const pid of wTeam){const p=pm[pid];if(p){p.rating-=wDelta;p.wins=Math.max(0,p.wins-1);p.matchesPlayed=Math.max(0,p.matchesPlayed-1);await dbPut('players',p)}}
+    for(const pid of lTeam){const p=pm[pid];if(p){p.rating-=lDelta;p.losses=Math.max(0,p.losses-1);p.matchesPlayed=Math.max(0,p.matchesPlayed-1);await dbPut('players',p)}}
+  }
+  for(const m of ms)await dbDel('matches',m.id);
+  await dbDel('tournaments',id);rPage();
+}
+
+/* ═══ CREATE MATCH MODAL — dual captains + challenge ═══ */
+let newMatchState={t1:[],t2:[],round:1,cap1:null,cap2:null,challenge:null,cashAmount:null};
+
+async function showCreateMatch(tId,round){
+  const t=await dbGet('tournaments',tId);
+  const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const available=t.playerIds.map(id=>pm[id]).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name));
+  newMatchState={t1:[],t2:[],round,cap1:null,cap2:null,challenge:null,cashAmount:null};
+  renderCreateMatch(tId,available,pm);
+}
+
+function renderCreateMatch(tId,available,pm){
+  const{t1,t2,cap1,cap2,challenge,cashAmount}=newMatchState;
+  const picked=[...t1,...t2];
+  const unpicked=available.filter(p=>!picked.includes(p.id));
+  const t1Full=t1.length===2,t2Full=t2.length===2,teamsReady=t1Full&&t2Full;
+  const cashOk=challenge!=='cash'||(cashAmount&&cashAmount>0);
+  const ready=teamsReady&&cap1&&cap2&&challenge&&cashOk;
+
+  showWideModal(`
+    <h2 class="text-xl font-bold mb-1">🏸 Create Challenge Match — Round ${newMatchState.round}</h2>
+    <p class="text-sm text-slate-500 mb-4">Pick teams, choose captains & set the stakes!</p>
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div class="rounded-xl border-2 ${t1Full?'border-brand-400 bg-brand-50':'border-slate-200'} p-4">
+        <h3 class="text-sm font-bold text-slate-700 mb-2">🟣 Team A ${t1Full?'✓':''}</h3>
+        ${t1.length?`<div class="space-y-1">${t1.map(id=>`<div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 shadow-sm"><div class="flex items-center gap-2">${avatarById(pm,id,'xs')}<span class="font-medium text-sm">${pm[id]?.name} ${cap1===id?'👑':''}</span></div><button onclick="rmFromTeam(1,${id},${tId})" class="text-red-400 hover:text-red-600 text-xs">✕</button></div>`).join('')}</div>`:'<p class="text-xs text-slate-400">Pick 2 players below</p>'}
+        ${t1Full?`<div class="mt-2"><p class="text-xs font-semibold text-amber-700 mb-1">👑 Team A Captain:</p><div class="flex gap-1">${t1.map(id=>`<button onclick="setC(1,${id},${tId})" class="px-2 py-1 rounded text-xs font-bold transition-all ${cap1===id?'captain-badge':'bg-white border border-slate-200 hover:border-amber-300'}">${firstName(pm,id)}</button>`).join('')}</div></div>`:''}
+      </div>
+      <div class="rounded-xl border-2 ${t2Full?'border-court-400 bg-court-50':'border-slate-200'} p-4">
+        <h3 class="text-sm font-bold text-slate-700 mb-2">🟢 Team B ${t2Full?'✓':''}</h3>
+        ${t2.length?`<div class="space-y-1">${t2.map(id=>`<div class="flex items-center justify-between bg-white rounded-lg px-3 py-2 shadow-sm"><div class="flex items-center gap-2">${avatarById(pm,id,'xs')}<span class="font-medium text-sm">${pm[id]?.name} ${cap2===id?'👑':''}</span></div><button onclick="rmFromTeam(2,${id},${tId})" class="text-red-400 hover:text-red-600 text-xs">✕</button></div>`).join('')}</div>`:'<p class="text-xs text-slate-400">Pick 2 players below</p>'}
+        ${t2Full?`<div class="mt-2"><p class="text-xs font-semibold text-amber-700 mb-1">👑 Team B Captain:</p><div class="flex gap-1">${t2.map(id=>`<button onclick="setC(2,${id},${tId})" class="px-2 py-1 rounded text-xs font-bold transition-all ${cap2===id?'captain-badge':'bg-white border border-slate-200 hover:border-amber-300'}">${firstName(pm,id)}</button>`).join('')}</div></div>`:''}
+      </div>
+    </div>
+    <div class="mb-4">
+      <h3 class="text-sm font-semibold text-slate-700 mb-2">Available Players (${unpicked.length})</h3>
+      <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">${unpicked.map(p=>{const t=tier(p.rating);return`<div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2 hover:bg-slate-100 transition"><div class="flex items-center gap-2">${avatarHTML(p,'xs')}<div><p class="font-medium text-sm">${p.name}</p><p class="text-xs text-slate-400">${p.rating} ${t.e}</p></div></div><div class="flex gap-1">${!t1Full?`<button onclick="addToTeam(1,${p.id},${tId})" class="bg-brand-100 text-brand-700 px-2 py-1 rounded text-xs font-bold hover:bg-brand-200">→ A</button>`:''}${!t2Full?`<button onclick="addToTeam(2,${p.id},${tId})" class="bg-court-100 text-court-700 px-2 py-1 rounded text-xs font-bold hover:bg-court-200">→ B</button>`:''}</div></div>`}).join('')}</div>
+    </div>
+    ${teamsReady?`
+    <div class="mb-4 p-4 rounded-xl border-2 ${challenge?'border-brand-300 bg-brand-50':'border-slate-200 bg-slate-50'}">
+      <h3 class="text-sm font-bold text-slate-700 mb-2">🎯 Challenge Stakes</h3>
+      <p class="text-xs text-slate-500 mb-3">Losing team's captain owes this!</p>
+      <div class="grid grid-cols-3 gap-3">
+        <button onclick="setChallenge('paya_soup',${tId})" class="challenge-btn challenge-paya rounded-xl p-3 text-center ${challenge==='paya_soup'?'active':''}"><p class="text-2xl mb-1">🍜</p><p class="text-xs font-bold">Paya Soup</p></button>
+        <button onclick="setChallenge('chai_bun_maska',${tId})" class="challenge-btn challenge-chai rounded-xl p-3 text-center ${challenge==='chai_bun_maska'?'active':''}"><p class="text-2xl mb-1">☕</p><p class="text-xs font-bold">Chai Bun Maska</p></button>
+        <button onclick="setChallenge('cash',${tId})" class="challenge-btn challenge-cash rounded-xl p-3 text-center ${challenge==='cash'?'active':''}"><p class="text-2xl mb-1">💰</p><p class="text-xs font-bold">Cash</p></button>
+      </div>
+      ${challenge==='cash'?`<div class="mt-3 flex items-center gap-2"><span class="text-lg font-bold text-green-700">₹</span><input type="number" min="10" max="50000" step="10" id="cashAmtInput" value="${cashAmount||''}" placeholder="Enter amount" onchange="setCashAmt(${tId})" oninput="setCashAmt(${tId})" class="cash-input flex-1 px-3 py-2 border-2 border-green-300 rounded-xl text-sm font-bold text-green-800 outline-none placeholder:text-green-300"/><span class="text-xs text-slate-500">INR</span></div>`:''}
+    </div>`:''}
+    <div class="flex gap-3">
+      <button onclick="confirmMatch(${tId})" class="bg-gradient-to-r from-court-600 to-court-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1 ${!ready?'opacity-40 cursor-not-allowed':''}" ${!ready?'disabled':''}>🎯 Create Challenge Match</button>
+      <button onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Cancel</button>
+    </div>
+  `);
+}
+
+async function _reloadAndRender(tId){
+  const t=await dbGet('tournaments',tId);const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const available=t.playerIds.map(id=>pm[id]).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name));
+  renderCreateMatch(tId,available,pm);
+}
+async function addToTeam(team,pid,tId){if(team===1&&newMatchState.t1.length<2)newMatchState.t1.push(pid);if(team===2&&newMatchState.t2.length<2)newMatchState.t2.push(pid);_reloadAndRender(tId)}
+async function rmFromTeam(team,pid,tId){if(team===1)newMatchState.t1=newMatchState.t1.filter(id=>id!==pid);if(team===2)newMatchState.t2=newMatchState.t2.filter(id=>id!==pid);if(newMatchState.cap1===pid)newMatchState.cap1=null;if(newMatchState.cap2===pid)newMatchState.cap2=null;_reloadAndRender(tId)}
+async function setC(team,pid,tId){if(team===1)newMatchState.cap1=pid;if(team===2)newMatchState.cap2=pid;_reloadAndRender(tId)}
+async function setChallenge(type,tId){newMatchState.challenge=type;if(type!=='cash')newMatchState.cashAmount=null;_reloadAndRender(tId)}
+async function setCashAmt(tId){const el=document.getElementById('cashAmtInput');if(el)newMatchState.cashAmount=parseInt(el.value)||null}
+
+async function confirmMatch(tId){
+  const{t1,t2,round,cap1,cap2,challenge,cashAmount}=newMatchState;
+  if(t1.length!==2||t2.length!==2||!cap1||!cap2||!challenge)return;
+  if(challenge==='cash'&&(!cashAmount||cashAmount<=0)){alert('Enter cash amount in ₹');return}
+  const ms=await dbIdx('matches','tournamentId',tId);
+  await dbAdd('matches',{tournamentId:tId,round,scheduledOrder:ms.length+1,team1:t1,team2:t2,captain1Id:cap1,captain2Id:cap2,team1Score:null,team2Score:null,winnerTeam:null,challenge,cashAmount:challenge==='cash'?cashAmount:null,oweSettled:false,status:'pending',createdAt:new Date().toISOString()});
+  closeModal();rPage();
+}
+
+/* ═══ DELETE MATCH ═══ */
+async function delMatch(mid){
+  const m=await dbGet('matches',mid);if(!m)return;
+  const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const t1n=teamNames(m.team1||[],pm),t2n=teamNames(m.team2||[],pm);
+  const msg=m.status==='completed'?`Delete match ${t1n} vs ${t2n} (${m.team1Score}-${m.team2Score})?\n\n⚠️ Player ELO ratings will be reverted.`:`Delete pending match ${t1n} vs ${t2n}?`;
+  if(!confirm(msg))return;
+  // Revert ELO if completed
+  if(m.status==='completed'&&m.winnerTeam){
+    const wTeam=m.winnerTeam===1?m.team1:m.team2,lTeam=m.winnerTeam===1?m.team2:m.team1;
+    const{wDelta,lDelta}=calcEloDoubles(teamAvgRating(wTeam,pm),teamAvgRating(lTeam,pm));
+    for(const pid of wTeam){const p=pm[pid];if(p){p.rating-=wDelta;p.wins=Math.max(0,p.wins-1);p.matchesPlayed=Math.max(0,p.matchesPlayed-1);await dbPut('players',p)}}
+    for(const pid of lTeam){const p=pm[pid];if(p){p.rating-=lDelta;p.losses=Math.max(0,p.losses-1);p.matchesPlayed=Math.max(0,p.matchesPlayed-1);await dbPut('players',p)}}
+  }
+  await dbDel('matches',mid);rPage();
+}
+
+/* ═══ SETTLE OWES ═══ */
+async function settleOwe(mid){const m=await dbGet('matches',mid);if(m){m.oweSettled=true;await dbPut('matches',m);rPage()}}
+async function unsettleOwe(mid){const m=await dbGet('matches',mid);if(m){m.oweSettled=false;await dbPut('matches',m);rPage()}}
+async function settleMultiple(midsCsv){
+  const mids=midsCsv.split(',').map(Number).filter(Boolean);
+  if(!mids.length)return;
+  if(!confirm('Settle '+mids.length+' debt(s)?'))return;
+  for(const mid of mids){const m=await dbGet('matches',mid);if(m){m.oweSettled=true;await dbPut('matches',m)}}
+  rPage();
+}
+async function settleAllForPlayer(pid){
+  const ms=await dbAll('matches');const ps=await dbAll('players');
+  const pm=Object.fromEntries(ps.map(p=>[p.id,p]));
+  const owes=getOwesFromMatches(ms,pm).filter(o=>o.captainId===pid&&!o.settled);
+  if(!owes.length){alert('No pending debts');return}
+  if(!confirm('Settle all '+owes.length+' debt(s) for '+(pm[pid]?.name||'player')+'?'))return;
+  for(const o of owes){const m=await dbGet('matches',o.matchId);if(m){m.oweSettled=true;await dbPut('matches',m)}}
+  rPage();
+}
+
+/* ═══ TOURNAMENT DETAIL ═══ */
+async function rTDetail(el){
+  const t=await dbGet('tournaments',tid);if(!t){navigate('tournaments');return}
+  if(!t.playerIds)t.playerIds=[];
+  const ap=await dbAll('players'),pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const ms=(await dbIdx('matches','tournamentId',t.id)).sort((a,b)=>(a.scheduledOrder||0)-(b.scheduledOrder||0));
+  const rnds=[...new Set(ms.map(m=>m.round||1))].sort((a,b)=>a-b);if(rnds.length===0)rnds.push(1);
+  const fi=rnds.find(r=>ms.some(m=>(m.round||1)===r&&m.status==='pending'));if(fi&&aRound===1)aRound=fi;
+  if(!rnds.includes(aRound))aRound=rnds[rnds.length-1]||1;
+  const rm=ms.filter(m=>(m.round||1)===aRound),cc=ms.filter(m=>m.status==='completed').length,pct=ms.length?Math.round(cc/ms.length*100):0;
+  const wl=getWeekLabel(t),dr=getDaysLeft(t);
+  const isRR=t.format==='round_robin';
+  // Player standings
+  const sm={};t.playerIds.forEach(id=>{const p=pm[id];sm[id]={id,n:p?.name||'?',w:0,l:0,pf:0,pa:0}});
+  ms.filter(m=>m.status==='completed').forEach(m=>{
+    const wt=m.winnerTeam===1?m.team1:m.team2,lt=m.winnerTeam===1?m.team2:m.team1;
+    const ws=m.winnerTeam===1?m.team1Score:m.team2Score,ls=m.winnerTeam===1?m.team2Score:m.team1Score;
+    wt.forEach(id=>{if(sm[id]){sm[id].w++;sm[id].pf+=ws||0;sm[id].pa+=ls||0}});
+    lt.forEach(id=>{if(sm[id]){sm[id].l++;sm[id].pf+=ls||0;sm[id].pa+=ws||0}});
+  });
+  const st=Object.values(sm).sort((a,b)=>b.w-a.w||(b.pf-b.pa)-(a.pf-a.pa));
+
+  el.innerHTML=`
+  <div class="${isRR?'rr-hero':'tourney-hero'} py-8 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto"><button onclick="navigate('${isRR?'roundrobin':'tournaments'}')" class="text-sm text-emerald-200 hover:text-white mb-3 inline-block">← Back</button><div class="flex items-start justify-between"><div><h1 class="text-3xl font-extrabold text-white">${t.name}</h1><div class="flex items-center gap-3 mt-2 flex-wrap"><span class="text-emerald-200 text-sm">📅 ${wl}</span><span class="text-emerald-200 text-sm">👥 ${t.playerIds.length} players</span><span class="text-emerald-200 text-sm">🏸 ${ms.length} matches</span><span class="px-2 py-0.5 rounded-full text-xs font-bold bg-white/10 text-white">${isRR?'Round Robin':'Challenge'}</span>${t.status==='in_progress'&&dr!==null?`<span class="px-2.5 py-1 rounded-full text-xs font-bold ${dr<=1?'bg-red-500/20 text-red-200':'bg-white/10 text-white'}">⏳ ${dr===0?'Ends today!':dr===1?'1 day':`${dr} days`}</span>`:''}</div></div><div class="flex gap-2">${t.status==='draft'?`<button onclick="startT(${t.id})" class="bg-white text-emerald-800 px-6 py-3 rounded-xl text-lg font-bold hover:bg-emerald-50 shadow-lg">▶️ Start</button>`:''}<button onclick="delT(${t.id})" class="bg-red-500/80 text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-red-600 shadow-lg">🗑️ Delete</button></div></div></div></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 shuttle-pattern">
+  ${ms.length>0?`<div class="card-glass rounded-2xl shadow-sm p-6"><div class="flex items-center justify-between mb-2"><span class="text-sm font-semibold text-slate-700">Progress</span><span class="text-sm text-slate-500">${cc}/${ms.length} (${pct}%)</span></div><div class="w-full bg-slate-200 rounded-full h-3"><div class="h-3 rounded-full transition-all bg-gradient-to-r ${pct===100?'from-emerald-500 to-green-500':'from-brand-500 to-purple-500'}" style="width:${pct}%"></div></div>${t.status==='completed'?'<p class="text-court-700 font-bold text-center mt-4 text-lg">🏆 Tournament Complete!</p>':''}</div>`:''}
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 space-y-4">
+      <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-slate-800">🏸 Matches</h2>${t.status==='in_progress'&&!isRR?`<button onclick="showCreateMatch(${t.id},${aRound})" class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 shadow-md">+ New Challenge</button>`:''}</div>
+      ${!isRR?`<div class="flex gap-1.5 flex-wrap items-center">
+        ${rnds.map(r=>{const dn=ms.filter(m=>m.round===r).length>0&&ms.filter(m=>m.round===r).every(m=>m.status==='completed');return`<button onclick="aRound=${r};rPage()" class="px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${aRound===r?'round-active':dn?'round-done':'round-pending'}">R${r} ${dn?'✓':''}</button>`}).join('')}
+        ${t.status==='in_progress'?`<button onclick="addRound(${t.id})" class="px-3 py-1.5 rounded-xl text-sm font-semibold border-2 border-dashed border-slate-300 text-slate-500 hover:border-brand-400 hover:text-brand-600">+ Round</button>`:''}
+      </div>`:''}
+      ${(isRR?ms:rm).length?`<div class="space-y-3">${(isRR?ms:rm).map(m=>{
+        const t1n=teamNames(m.team1||[],pm),t2n=teamNames(m.team2||[],pm);
+        const t1r=teamAvgRating(m.team1||[],pm),t2r=teamAvgRating(m.team2||[],pm);
+        const c1=firstName(pm,m.captain1Id),c2=firstName(pm,m.captain2Id);
+        const ch=CHALLENGES[m.challenge];
+        return`<div class="rounded-2xl shadow-sm border p-5 ${m.status==='completed'?'match-completed winner-glow':'match-bg border-slate-200'}">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            ${m.captain1Id?captainBadge(c1):''}${m.challenge?challengeBadge(m.challenge,m.cashAmount):''}${m.captain2Id?captainBadge(c2):''}
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex-1 text-center"><p class="font-bold text-sm ${m.winnerTeam===1?'text-court-700':'text-slate-700'}">${t1n}</p><p class="text-xs text-slate-400">👑 ${c1} · ${t1r} ELO</p></div>
+            <div class="flex-shrink-0 mx-3 text-center">
+              ${m.status==='completed'?`<div class="flex items-center gap-3"><span class="text-2xl font-extrabold ${m.winnerTeam===1?'text-court-700':'text-slate-400'}">${m.team1Score}</span><span class="text-slate-300 text-lg">–</span><span class="text-2xl font-extrabold ${m.winnerTeam===2?'text-court-700':'text-slate-400'}">${m.team2Score}</span></div>`
+              :t.status==='in_progress'?`<div class="flex items-center gap-2"><input type="number" min="0" max="30" id="s1-${m.id}" class="score-input w-14 h-10 text-center text-lg font-bold border-2 border-slate-200 rounded-xl outline-none" placeholder="0"/><span class="text-slate-300 font-bold">–</span><input type="number" min="0" max="30" id="s2-${m.id}" class="score-input w-14 h-10 text-center text-lg font-bold border-2 border-slate-200 rounded-xl outline-none" placeholder="0"/><button onclick="subScore(${m.id})" class="bg-gradient-to-r from-court-600 to-court-700 text-white w-10 h-10 rounded-xl hover:opacity-90 shadow-md">✓</button></div>`
+              :'<span class="text-sm text-slate-400 italic">Pending</span>'}
+            </div>
+            <div class="flex-1 text-center"><p class="font-bold text-sm ${m.winnerTeam===2?'text-court-700':'text-slate-700'}">${t2n}</p><p class="text-xs text-slate-400">👑 ${c2} · ${t2r} ELO</p></div>
+          </div>
+          ${m.status==='completed'&&m.challenge?`<p class="text-center text-xs text-court-600 mt-2 font-semibold">🏆 ${m.winnerTeam===1?t1n:t2n} win!</p>
+            <p class="text-center text-xs mt-1 font-bold ${m.oweSettled?'text-green-600 line-through':'text-red-600'}">${m.oweSettled?'✅ Settled':'⚠️'} ${m.winnerTeam===1?c2:c1} owes ${ch?.emoji} ${m.challenge==='cash'&&m.cashAmount?'₹'+m.cashAmount:ch?.label||''} to ${m.winnerTeam===1?t1n:t2n}</p>`
+          :m.status==='completed'?`<p class="text-center text-xs text-court-600 mt-2 font-semibold">🏆 ${m.winnerTeam===1?t1n:t2n} win!</p>`:''
+          }
+          <div class="text-center mt-2"><button onclick="event.stopPropagation();delMatch(${m.id})" class="text-xs text-red-400 hover:text-red-600 hover:bg-red-50 px-2 py-1 rounded-lg transition-all" title="Delete match">🗑️ Delete Match</button></div>
+        </div>`}).join('')}</div>`
+      :`<div class="card-glass rounded-2xl p-12 text-center"><p class="text-4xl mb-3">🏸</p><p class="text-slate-400">No matches yet</p>${t.status==='in_progress'&&!isRR?`<button onclick="showCreateMatch(${t.id},${aRound})" class="mt-4 bg-gradient-to-r from-brand-600 to-brand-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 shadow-md">🎯 Create Challenge Match</button>`:''}</div>`}
+      ${t.status==='in_progress'?`<div class="text-xs text-slate-400 bg-white/60 rounded-xl p-3 border border-slate-100"><p class="font-semibold text-slate-500 mb-1">🏸 Rules:</p><p>2v2 doubles · Score to 21 · At 20-20: win by 2 (max 30)</p><p class="mt-1">👑 Each team has a captain — losing captain owes the challenge!</p></div>`:''}
+      ${t.status==='in_progress'&&ms.length>0&&ms.every(m=>m.status==='completed')?`<div class="text-center"><button onclick="completeT(${t.id})" class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-8 py-3 rounded-xl font-bold text-lg hover:opacity-90 shadow-lg">🏆 Complete Tournament</button></div>`:''}
+    </div>
+    <div>
+      <h2 class="text-xl font-bold text-slate-800 mb-4">📊 Standings</h2>
+      <div class="card-glass rounded-2xl shadow-sm overflow-hidden"><table class="w-full text-sm"><thead class="bg-slate-50 border-b"><tr><th class="px-3 py-2.5 text-left text-xs font-semibold text-slate-500">#</th><th class="px-3 py-2.5 text-left text-xs font-semibold text-slate-500">Player</th><th class="px-3 py-2.5 text-center text-xs font-semibold text-slate-500">W</th><th class="px-3 py-2.5 text-center text-xs font-semibold text-slate-500">L</th><th class="px-3 py-2.5 text-center text-xs font-semibold text-slate-500">+/-</th></tr></thead><tbody class="divide-y divide-slate-100">${st.map((s,i)=>`<tr class="${i===0&&t.status==='completed'?'bg-amber-50/80':''}"><td class="px-3 py-2.5 font-mono font-bold">${i===0&&t.status==='completed'?'🥇':i===1&&t.status==='completed'?'🥈':i===2&&t.status==='completed'?'🥉':i+1}</td><td class="px-3 py-2.5 font-semibold text-slate-700 text-xs">${s.n}</td><td class="px-3 py-2.5 text-center text-court-700 font-bold">${s.w}</td><td class="px-3 py-2.5 text-center text-red-500 font-bold">${s.l}</td><td class="px-3 py-2.5 text-center font-mono text-xs ${(s.pf-s.pa)>0?'text-court-700':(s.pf-s.pa)<0?'text-red-500':'text-slate-400'}">${(s.pf-s.pa)>0?'+':''}${s.pf-s.pa}</td></tr>`).join('')}</tbody></table></div>
+      ${t.status==='completed'?`<div class="mt-4 bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-200 rounded-2xl p-4 text-center"><p class="text-sm font-bold text-amber-800">🏆 Week MVP</p><p class="text-xl font-extrabold text-amber-700 mt-1">${st[0]?.n||'TBD'}</p><p class="text-xs text-amber-600 mt-1">${st[0]?.w}W ${st[0]?.l}L</p></div>`:''}
+      <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4">🍜 Owes Tracker</h2>
+      <div id="owes-panel"></div>
+    </div>
+  </div></div>`;
+  // Render owes
+  const op=document.getElementById('owes-panel');
+  if(op){const owes=getOwesFromMatches(ms,pm);const pend=owes.filter(o=>!o.settled),sett=owes.filter(o=>o.settled);
+  op.innerHTML=`${owes.length===0?'<div class="card-glass rounded-2xl p-6 text-center"><p class="text-3xl mb-2">🤝</p><p class="text-sm text-slate-400">No debts yet!</p></div>':''}
+    ${pend.length?`<div class="space-y-2 mb-3">${pend.map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount:ch?.label;return`<div class="owes-card rounded-xl p-3 shadow-sm"><div class="flex items-center justify-between"><div><p class="text-sm font-bold text-amber-900">👑 ${o.captainName} owes</p><p class="text-xs text-amber-700 mt-0.5">${ch?.emoji} ${lbl} → ${o.winNames}</p></div><button onclick="settleOwe(${o.matchId})" class="bg-green-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600">✅ Settled</button></div></div>`}).join('')}</div>`:''}
+    ${sett.length?`<div class="space-y-2"><p class="text-xs font-semibold text-slate-400 uppercase mb-1">Settled ✅</p>${sett.map(o=>{const ch=CHALLENGES[o.challenge];return`<div class="owes-settled rounded-xl p-3"><div class="flex items-center justify-between"><div><p class="text-sm font-bold text-green-800 line-through">👑 ${o.captainName}</p><p class="text-xs text-green-700">${ch?.emoji} ${ch?.label} → ${o.winNames}</p></div><button onclick="unsettleOwe(${o.matchId})" class="text-slate-400 hover:text-red-500 text-xs">↩️</button></div></div>`}).join('')}</div>`:''}`}
+}
+
+async function startT(id){const t=await dbGet('tournaments',id);t.status='in_progress';await dbPut('tournaments',t);rPage()}
+async function completeT(id){const t=await dbGet('tournaments',id);t.status='completed';await dbPut('tournaments',t);rPage()}
+async function addRound(tId){const ms=await dbIdx('matches','tournamentId',tId);const maxR=ms.length?Math.max(...ms.map(m=>m.round)):0;aRound=maxR+1;rPage()}
+
+async function subScore(mid){
+  const s1=parseInt(document.getElementById(`s1-${mid}`).value),s2=parseInt(document.getElementById(`s2-${mid}`).value);
+  if(isNaN(s1)||isNaN(s2)){alert('Enter both scores');return}
+  const v=validateScore(s1,s2);if(!v.valid){alert(v.msg);return}
+  const m=await dbGet('matches',mid);m.team1Score=s1;m.team2Score=s2;m.winnerTeam=s1>s2?1:2;m.status='completed';m.completedAt=new Date().toISOString();await dbPut('matches',m);
+  const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const wTeam=m.winnerTeam===1?m.team1:m.team2,lTeam=m.winnerTeam===1?m.team2:m.team1;
+  const{wDelta,lDelta}=calcEloDoubles(teamAvgRating(wTeam,pm),teamAvgRating(lTeam,pm));
+  for(const id of wTeam){const p=pm[id];if(p){p.rating+=wDelta;p.wins++;p.matchesPlayed++;await dbPut('players',p)}}
+  for(const id of lTeam){const p=pm[id];if(p){p.rating+=lDelta;p.losses++;p.matchesPlayed++;await dbPut('players',p)}}
+  rPage();
+}
+
+/* ═══ ROUND ROBIN TAB ═══ */
+async function rRoundRobin(el){
+  const ts=(await dbAll('tournaments')).filter(t=>t.format==='round_robin').sort((a,b)=>(b.startDate||'').localeCompare(a.startDate||''));
+  const sb={draft:'📝 Draft|bg-slate-100 text-slate-600',in_progress:'🔥 Live|bg-emerald-100 text-emerald-700',completed:'✅ Done|bg-blue-100 text-blue-700'};
+  el.innerHTML=`<div class="rr-hero py-10 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto text-center"><h1 class="text-4xl font-extrabold text-white">🔄 Round Robin</h1><p class="text-slate-300 mt-2">Auto-paired teams by ELO ranking</p></div></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 shuttle-pattern">
+  <div class="flex items-center justify-between"><div><p class="text-slate-500">${ts.length} round robin tournaments</p></div><button onclick="showNewRR()" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold hover:opacity-90 shadow-md">+ New Round Robin</button></div>
+  <div class="space-y-4">${ts.map(t=>{const[lb,cl]=(sb[t.status]||sb.draft).split('|');const wl=getWeekLabel(t);return`<div class="card-glass card-hover rounded-2xl shadow-sm p-6 flex items-center justify-between"><div><div class="flex items-center gap-3 flex-wrap"><h3 class="text-lg font-bold text-slate-800">${t.name}</h3><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${cl}">${lb}</span><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">🔄 Round Robin</span></div><p class="text-sm text-slate-500 mt-1">📅 ${wl} · 👥 ${t.playerIds.length} players · ${t.rrTeams?.length||'?'} teams</p></div><div class="flex items-center gap-2"><button onclick="navigate('tournament-detail',${t.id})" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90">View →</button><button onclick="delT(${t.id})" class="bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-600">🗑️</button></div></div>`}).join('')}${ts.length===0?'<div class="card-glass rounded-2xl shadow-sm p-16 text-center"><p class="text-5xl mb-4">🔄</p><p class="text-lg text-slate-400">No round robin tournaments yet</p><p class="text-sm text-slate-400 mt-1">Teams are auto-formed by ELO ranking (snake draft)</p></div>':''}</div>
+  <div class="card-glass rounded-2xl p-6"><h3 class="text-sm font-bold text-slate-700 mb-2">How Round Robin Works</h3><div class="text-xs text-slate-500 space-y-1"><p>1. Select players — teams auto-formed by ELO (snake draft: #1+#N, #2+#(N-1), etc.)</p><p>2. Every team plays every other team once</p><p>3. No challenge stakes — pure competitive doubles!</p><p>4. ELO ratings update after each match</p></div></div></div>`
+}
+async function showNewRR(){
+  const ps=(await dbAll('players')).sort((a,b)=>b.rating-a.rating),today=new Date().toISOString().split('T')[0],endDef=addDays(new Date(),6).toISOString().split('T')[0];
+  showModal(`<h2 class="text-xl font-bold mb-4">🔄 New Round Robin</h2><form onsubmit="createRR(event)" class="space-y-4"><div><label class="block text-sm font-medium text-slate-700 mb-1">Name *</label><input type="text" id="rrn" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" placeholder="Week 1 Round Robin" required autofocus/></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium text-slate-700 mb-1">Start</label><input type="date" id="rrs" value="${today}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl" required onchange="document.getElementById('rre').value=addDays(new Date(this.value),6).toISOString().split('T')[0]"/></div><div><label class="block text-sm font-medium text-slate-700 mb-1">End</label><input type="date" id="rre" value="${endDef}" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-slate-50" readonly/></div></div><div><div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-slate-700">Players (<span id="rrc">0</span>) — need even number ≥4</label><button type="button" onclick="document.querySelectorAll('.rrcb').forEach(x=>x.checked=!x.checked);updRRC()" class="text-xs text-brand-600 hover:underline font-medium">Toggle All</button></div><div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto border border-slate-200 rounded-xl p-3">${ps.map(p=>`<label class="flex items-center gap-2 p-2 rounded-lg cursor-pointer hover:bg-slate-50"><input type="checkbox" class="rrcb rounded accent-blue-600" value="${p.id}" onchange="updRRC()"/><div><p class="text-sm font-medium">${p.name}</p><p class="text-xs text-slate-400">${p.rating} ELO</p></div></label>`).join('')}</div><p id="rri" class="text-xs text-slate-500 mt-2">Need ≥ 4 players (even number)</p></div><div class="flex gap-3 pt-2"><button type="submit" id="rrb" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2.5 rounded-xl font-semibold flex-1 disabled:opacity-40" disabled>Create Round Robin</button><button type="button" onclick="closeModal()" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-xl font-medium flex-1">Cancel</button></div></form>`)
+}
+function updRRC(){const n=document.querySelectorAll('.rrcb:checked').length;document.getElementById('rrc').textContent=n;const ok=n>=4&&n%2===0;document.getElementById('rrb').disabled=!ok;document.getElementById('rri').textContent=ok?`✅ ${n} players → ${n/2} teams → ${(n/2)*((n/2)-1)/2} matches`:`Need ≥4 players (even number). Got ${n}${n%2!==0?' — odd! Remove or add 1':''}`}
+async function createRR(e){
+  e.preventDefault();
+  const nm=document.getElementById('rrn').value.trim(),sd=document.getElementById('rrs').value,ed=document.getElementById('rre').value;
+  const ids=[...document.querySelectorAll('.rrcb:checked')].map(c=>+c.value);
+  if(ids.length<4||ids.length%2!==0)return;
+  const ap=await dbAll('players');const pm=Object.fromEntries(ap.map(p=>[p.id,p]));
+  const teams=generateRRTeams(ids,pm);
+  const tId=await dbAdd('tournaments',{name:nm,date:sd,startDate:sd,endDate:ed,status:'draft',playerIds:ids,format:'round_robin',rrTeams:teams,createdAt:new Date().toISOString()});
+  // Generate all matches
+  const matchups=generateRRMatches(teams);
+  for(let i=0;i<matchups.length;i++){
+    const mu=matchups[i];
+    await dbAdd('matches',{tournamentId:tId,round:1,scheduledOrder:i+1,team1:mu.team1,team2:mu.team2,captain1Id:mu.team1[0],captain2Id:mu.team2[0],team1Score:null,team2Score:null,winnerTeam:null,challenge:null,oweSettled:false,status:'pending',createdAt:new Date().toISOString()});
+  }
+  closeModal();navigate('tournament-detail',tId);
+}
+async function rRRDetail(el){rTDetail(el)} // Reuse tournament detail
+
+/* ═══ JOURNAL TAB ═══ */
+async function rJournal(el){
+  const[ps,ts,ms]=await Promise.all([dbAll('players'),dbAll('tournaments'),dbAll('matches')]);
+  const pm=Object.fromEntries(ps.map(p=>[p.id,p]));
+  const completed=ms.filter(m=>m.status==='completed'&&m.challenge);
+  const owes=getOwesFromMatches(ms,pm);
+  const pending=owes.filter(o=>!o.settled),settled=owes.filter(o=>o.settled);
+
+  // DETAILED per-player: who owes whom, with cash aggregation + matchIds for settlement
+  const playerDebts={};
+  ps.forEach(p=>{playerDebts[p.id]={id:p.id,name:p.name,photo:p.photo,avatarColor:p.avatarColor,
+    owesTo:{},owedBy:{},totalOwes:0,totalOwed:0,cashOwes:0,cashOwed:0,matchIds:[]}});
+  owes.filter(o=>!o.settled).forEach(o=>{
+    const capId=o.captainId;
+    o.winTeam.forEach(wId=>{
+      if(!playerDebts[capId])return;
+      if(!playerDebts[capId].owesTo[wId])playerDebts[capId].owesTo[wId]={paya_soup:0,chai_bun_maska:0,cash:0,cashTotal:0,name:pm[wId]?.name||'?',matchIds:[]};
+      playerDebts[capId].owesTo[wId][o.challenge]++;
+      playerDebts[capId].owesTo[wId].matchIds.push(o.matchId);
+      if(o.challenge==='cash'&&o.cashAmount)playerDebts[capId].owesTo[wId].cashTotal+=o.cashAmount;
+      playerDebts[capId].totalOwes++;
+      if(!playerDebts[capId].matchIds.includes(o.matchId))playerDebts[capId].matchIds.push(o.matchId);
+      if(o.challenge==='cash'&&o.cashAmount)playerDebts[capId].cashOwes+=o.cashAmount;
+      if(!playerDebts[wId])return;
+      if(!playerDebts[wId].owedBy[capId])playerDebts[wId].owedBy[capId]={paya_soup:0,chai_bun_maska:0,cash:0,cashTotal:0,name:pm[capId]?.name||'?',matchIds:[]};
+      playerDebts[wId].owedBy[capId][o.challenge]++;
+      playerDebts[wId].owedBy[capId].matchIds.push(o.matchId);
+      if(o.challenge==='cash'&&o.cashAmount)playerDebts[wId].owedBy[capId].cashTotal+=o.cashAmount;
+      playerDebts[wId].totalOwed++;
+      if(o.challenge==='cash'&&o.cashAmount)playerDebts[wId].cashOwed+=o.cashAmount;
+    });
+  });
+  const pDebts=Object.values(playerDebts).filter(p=>p.totalOwes>0||p.totalOwed>0)
+    .sort((a,b)=>(b.totalOwes+b.cashOwes)-(a.totalOwes+a.cashOwes));
+  const totalCashPending=pending.filter(o=>o.challenge==='cash'&&o.cashAmount).reduce((s,o)=>s+o.cashAmount,0);
+
+  // Group matches by tournament
+  const byTourney={};
+  completed.forEach(m=>{if(!byTourney[m.tournamentId])byTourney[m.tournamentId]=[];byTourney[m.tournamentId].push(m)});
+
+  el.innerHTML=`
+  <div class="journal-hero py-12 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto text-center"><h1 class="text-4xl font-extrabold text-white font-display tracking-tight">📋 Challenge Journal</h1><p class="text-orange-200 mt-2 text-lg">Player debts, cash ledger & challenge history</p></div></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 shuttle-pattern">
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">${[
+    {l:'Challenges',v:completed.length,i:'🎯',g:'from-brand-500 to-brand-700'},
+    {l:'Open Debts',v:pending.length,i:'⚠️',g:'from-red-500 to-orange-500'},
+    {l:'Settled',v:settled.length,i:'✅',g:'from-court-500 to-court-700'},
+    {l:'Cash ₹ Pending',v:totalCashPending?'₹'+totalCashPending.toLocaleString('en-IN'):'₹0',i:'💰',g:'from-amber-500 to-orange-600'}
+  ].map(s=>`<div class="card-glass card-hover rounded-2xl shadow-sm p-5"><div class="flex items-center gap-3"><div class="w-11 h-11 rounded-xl bg-gradient-to-br ${s.g} flex items-center justify-center text-lg text-white shadow-md">${s.i}</div><div><p class="text-xl font-bold text-slate-800 font-display">${s.v}</p><p class="text-xs text-slate-500 font-medium">${s.l}</p></div></div></div>`).join('')}</div>
+
+  ${pDebts.length?`<div class="space-y-4"><h2 class="text-xl font-bold text-slate-800 font-display flex items-center gap-2"><span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-sm shadow-md">👤</span> Player Debt Details</h2>
+  ${pDebts.map(pd=>{
+    const owesToEntries=Object.entries(pd.owesTo);
+    const owedByEntries=Object.entries(pd.owedBy);
+    const netCash=pd.cashOwes-pd.cashOwed;
+    const netItems=pd.totalOwes-pd.totalOwed;
+    const isDebtor=netItems>0;
+    return`<div class="journal-player-card card-glass border ${isDebtor?'border-red-200':'border-green-200'}">
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3 cursor-pointer" onclick="showProfile(${pd.id})">
+            ${avatarHTML(pd,'md')}
+            <div><p class="font-bold text-slate-800 text-base">${pd.name}</p>
+            <div class="flex items-center gap-2 mt-0.5">${pd.totalOwes?`<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200">Owes ${pd.totalOwes}</span>`:''}${pd.totalOwed?`<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-50 text-green-600 border border-green-200">Owed ${pd.totalOwed}</span>`:''}</div>
+            </div>
+          </div>
+          <div class="text-right">
+            ${pd.cashOwes||pd.cashOwed?`<p class="text-lg font-extrabold font-display ${netCash>0?'text-red-600':netCash<0?'text-green-600':'text-slate-400'}">${netCash>0?'−':''}${netCash<0?'+':''}₹${Math.abs(netCash).toLocaleString('en-IN')}</p><p class="text-[10px] text-slate-500 uppercase font-semibold">net cash</p>`:
+            `<p class="text-lg font-extrabold font-display ${isDebtor?'text-red-600':'text-green-600'}">${isDebtor?'−':'+'} ${Math.abs(netItems)}</p><p class="text-[10px] text-slate-500 uppercase font-semibold">net items</p>`}
+          </div>
+        </div>
+        ${owesToEntries.length?`<div class="mb-3"><p class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 flex items-center gap-1">⚠️ Owes To</p><div class="space-y-1">${owesToEntries.map(([tid,d])=>{
+          const items=[];
+          if(d.paya_soup)items.push('<span class="text-red-700">🍜×'+d.paya_soup+'</span>');
+          if(d.chai_bun_maska)items.push('<span class="text-amber-700">☕×'+d.chai_bun_maska+'</span>');
+          if(d.cash)items.push('<span class="text-green-700">💰×'+d.cash+(d.cashTotal?' <b>₹'+d.cashTotal.toLocaleString('en-IN')+'</b>':'')+'</span>');
+          return`<div class="journal-detail-row bg-red-50/60 border border-red-100"><div class="flex items-center gap-2">${avatarById(pm,parseInt(tid),'xs')}<span class="font-semibold text-slate-700">${d.name}</span></div><div class="flex items-center gap-2 font-medium">${items.join('<span class="text-slate-300 mx-0.5">·</span>')}</div></div>`}).join('')}</div></div>`:''}
+        ${owedByEntries.length?`<div><p class="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 flex items-center gap-1">✅ Owed By</p><div class="space-y-1">${owedByEntries.map(([tid,d])=>{
+          const items=[];
+          if(d.paya_soup)items.push('<span class="text-red-700">🍜×'+d.paya_soup+'</span>');
+          if(d.chai_bun_maska)items.push('<span class="text-amber-700">☕×'+d.chai_bun_maska+'</span>');
+          if(d.cash)items.push('<span class="text-green-700">💰×'+d.cash+(d.cashTotal?' <b>₹'+d.cashTotal.toLocaleString('en-IN')+'</b>':'')+'</span>');
+          return`<div class="journal-detail-row bg-green-50/60 border border-green-100"><div class="flex items-center gap-2">${avatarById(pm,parseInt(tid),'xs')}<span class="font-semibold text-slate-700">${d.name}</span></div><div class="flex items-center gap-2 font-medium">${items.join('<span class="text-slate-300 mx-0.5">·</span>')}</div></div>`}).join('')}</div></div>`:''}
+      </div>
+    </div>`}).join('')}</div>`:
+  '<div class="card-glass rounded-2xl p-12 text-center"><p class="text-5xl mb-3">🤝</p><p class="text-lg text-slate-400">No challenge debts yet</p><p class="text-sm text-slate-400 mt-1">Play some matches with stakes to see player debts here</p></div>'}
+
+  ${pending.length?`<div class="card-glass rounded-2xl shadow-sm p-6"><h2 class="text-xl font-bold text-slate-800 mb-4 font-display flex items-center gap-2"><span class="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white text-sm shadow-md">⚠️</span> Open Debts (${pending.length})</h2><div class="space-y-2">${pending.map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount.toLocaleString('en-IN'):ch?.label;return`<div class="owes-card rounded-xl p-4"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="flex items-center gap-1">${avatarById(pm,o.captainId,'xs')}</div><div><p class="text-sm font-bold text-amber-900">👑 ${o.captainName} owes ${ch?.emoji} ${lbl}</p><p class="text-xs text-amber-700 mt-0.5">→ to ${o.winNames}</p></div></div><button onclick="settleOwe(${o.matchId})" class="bg-gradient-to-r from-court-500 to-court-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:opacity-90 shadow-sm">✅ Settle</button></div></div>`}).join('')}</div></div>`:''
+  }
+
+  <div class="card-glass rounded-2xl shadow-sm p-6"><h2 class="text-xl font-bold text-slate-800 mb-4 font-display flex items-center gap-2"><span class="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-white text-sm shadow-md">📜</span> Match History</h2>
+  ${Object.keys(byTourney).length?Object.entries(byTourney).map(([tId,matches])=>{
+    const t=ts.find(x=>x.id===parseInt(tId));
+    return`<div class="mb-6"><div class="flex items-center gap-2 mb-3"><div class="w-1.5 h-6 rounded-full bg-gradient-to-b from-brand-400 to-brand-600"></div><p class="text-sm font-bold text-brand-700 font-display">${t?.name||'Unknown'} · ${t?getWeekLabel(t):''}</p></div><div class="space-y-2">${matches.map(m=>{
+      const t1=teamNames(m.team1||[],pm),t2=teamNames(m.team2||[],pm),w=m.winnerTeam===1;
+      const losingCap=m.winnerTeam===1?firstName(pm,m.captain2Id):firstName(pm,m.captain1Id);
+      const ch=CHALLENGES[m.challenge];
+      return`<div class="flex items-center justify-between p-3 rounded-xl bg-white/60 border border-slate-100 hover:bg-white/80 transition"><div class="flex-1"><div class="flex items-center gap-2 text-xs flex-wrap"><span class="${w?'font-bold text-court-700':'text-slate-500'}">${t1}</span><span class="text-slate-300 text-[10px]">VS</span><span class="${!w?'font-bold text-court-700':'text-slate-500'}">${t2}</span><span class="font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-lg">${m.team1Score} – ${m.team2Score}</span>${ch?challengeBadge(m.challenge,m.cashAmount):''}</div><p class="text-[11px] text-slate-400 mt-1">👑 ${losingCap} owes ${m.challenge==='cash'&&m.cashAmount?'₹'+m.cashAmount.toLocaleString('en-IN'):ch?.label||''} ${m.oweSettled?'<span class="text-green-600 font-bold">✅</span>':'<span class="text-red-500 font-bold">⚠️</span>'}</p></div></div>`}).join('')}</div></div>`}).join(''):'<p class="text-slate-400 text-center py-8">No challenge matches completed yet</p>'}
+  </div>
+
+  ${settled.length?`<div class="card-glass rounded-2xl shadow-sm p-6"><h2 class="text-xl font-bold text-slate-800 mb-4 font-display flex items-center gap-2"><span class="w-9 h-9 rounded-xl bg-gradient-to-br from-court-500 to-court-700 flex items-center justify-center text-white text-sm shadow-md">✅</span> Settled (${settled.length})</h2><div class="space-y-2">${settled.map(o=>{const ch=CHALLENGES[o.challenge];const lbl=o.challenge==='cash'&&o.cashAmount?'₹'+o.cashAmount.toLocaleString('en-IN'):ch?.label;return`<div class="owes-settled rounded-xl p-3"><div class="flex items-center justify-between"><div class="flex items-center gap-2">${avatarById(pm,o.captainId,'xs')}<p class="text-sm font-medium text-green-800 line-through">👑 ${o.captainName} — ${ch?.emoji} ${lbl} → ${o.winNames}</p></div><button onclick="unsettleOwe(${o.matchId})" class="text-slate-400 hover:text-red-500 text-xs px-2 py-1 rounded-lg hover:bg-red-50">↩️ Undo</button></div></div>`}).join('')}</div></div>`:''}
+  </div>`
+}
+
+/* ═══ LEADERBOARD ═══ */
+// Rank movement tracking via localStorage
+function getRankKey(filter){return`pts_ranks_${filter||'all'}`}
+function getPrevRanks(filter){try{return JSON.parse(localStorage.getItem(getRankKey(filter)))||{}}catch(e){return{}}}
+function saveRanks(filter,ranksMap){try{localStorage.setItem(getRankKey(filter),JSON.stringify(ranksMap))}catch(e){}}
+function rankMoveBadge(playerId,currentRank,prevRanks){
+  const prev=prevRanks[playerId];
+  if(prev===undefined||prev===null)return`<span class="move-badge move-badge-new">🆕 NEW</span>`;
+  const diff=prev-currentRank; // positive = moved up
+  if(diff>0)return`<span class="move-badge move-badge-up">▲ ${diff}</span>`;
+  if(diff<0)return`<span class="move-badge move-badge-down">▼ ${Math.abs(diff)}</span>`;
+  return'<span class="rank-same">—</span>';
+}
+let lwf='all';
+async function rLeader(el){
+  const ps=(await dbAll('players')).sort((a,b)=>b.rating-a.rating),md=i=>i===0?'🥇':i===1?'🥈':i===2?'🥉':`#${i+1}`;
+  const ts=await dbAll('tournaments'),opts=ts.filter(t=>t.status==='completed'||t.status==='in_progress').map(t=>({id:t.id,label:`${t.name} (${getWeekLabel(t)})`}));
+  let ws=null,wn='';
+  if(lwf!=='all'){const ft=await dbGet('tournaments',parseInt(lwf));if(ft){wn=`${ft.name} — ${getWeekLabel(ft)}`;const ms=await dbIdx('matches','tournamentId',ft.id),done=ms.filter(m=>m.status==='completed'),pMap=Object.fromEntries(ps.map(p=>[p.id,p])),sm={};ft.playerIds.forEach(id=>{const p=pMap[id];if(p)sm[id]={id,name:p.name,rating:p.rating,w:0,l:0,pf:0,pa:0}});done.forEach(m=>{const wt=m.winnerTeam===1?m.team1:m.team2,lt=m.winnerTeam===1?m.team2:m.team1,wsc=m.winnerTeam===1?m.team1Score:m.team2Score,lsc=m.winnerTeam===1?m.team2Score:m.team1Score;wt.forEach(id=>{if(sm[id]){sm[id].w++;sm[id].pf+=wsc||0;sm[id].pa+=lsc||0}});lt.forEach(id=>{if(sm[id]){sm[id].l++;sm[id].pf+=lsc||0;sm[id].pa+=wsc||0}})});ws=Object.values(sm).sort((a,b)=>b.w-a.w||(b.pf-b.pa)-(a.pf-a.pa))}}
+  // Rank movement: get previous ranks, compute current, save after render
+  const prevAll=getPrevRanks('all');
+  const prevT=lwf!=='all'?getPrevRanks('t_'+lwf):{};
+  // Build current rank maps
+  const curAllRanks={};ps.forEach((p,i)=>{curAllRanks[p.id]=i+1});
+  const curTRanks={};if(ws)ws.forEach((s,i)=>{curTRanks[s.id]=i+1});
+  // Count movers for summary
+  const movedUp=ps.filter(p=>prevAll[p.id]!==undefined&&prevAll[p.id]>(curAllRanks[p.id]||0));
+  const movedDown=ps.filter(p=>prevAll[p.id]!==undefined&&prevAll[p.id]<(curAllRanks[p.id]||0));
+  el.innerHTML=`
+  <div class="leaderboard-hero py-10 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto text-center"><h1 class="text-4xl font-extrabold text-white">🥇 Leaderboard</h1><p class="text-slate-300 mt-2">${ws?'Week Standings':'All-Time ELO Rankings'}</p></div></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 shuttle-pattern">
+  <div class="flex justify-end"><select onchange="lwf=this.value;rPage()" class="px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-white shadow-sm focus:ring-2 focus:ring-brand-400 outline-none"><option value="all" ${lwf==='all'?'selected':''}>All Time (ELO)</option>${opts.map(o=>`<option value="${o.id}" ${lwf==o.id?'selected':''}>${o.label}</option>`).join('')}</select></div>
+  ${ws?`
+    <div class="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-200 rounded-2xl p-4 text-center"><p class="text-sm text-brand-600 font-semibold">📅 Tournament</p><p class="text-lg font-bold text-brand-800">${wn}</p></div>
+    ${ws.length>=3?`<div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto"><div class="podium-silver rounded-2xl p-5 text-center mt-8 card-hover"><p class="text-3xl">🥈</p><p class="font-bold text-lg mt-2">${ws[1].name}</p><p class="text-sm text-slate-600 mt-1">${ws[1].w}W ${ws[1].l}L</p>${rankMoveBadge(ws[1].id,2,prevT)}</div><div class="podium-gold rounded-2xl p-5 text-center card-hover shadow-lg"><p class="text-4xl">🥇</p><p class="font-extrabold text-xl mt-2">${ws[0].name}</p><p class="text-sm text-amber-700 mt-1">${ws[0].w}W ${ws[0].l}L</p>${rankMoveBadge(ws[0].id,1,prevT)}</div><div class="podium-bronze rounded-2xl p-5 text-center mt-12 card-hover"><p class="text-3xl">🥉</p><p class="font-bold text-lg mt-2">${ws[2].name}</p><p class="text-sm text-slate-600 mt-1">${ws[2].w}W ${ws[2].l}L</p>${rankMoveBadge(ws[2].id,3,prevT)}</div></div>`:''}
+    <div class="card-glass rounded-2xl shadow-sm overflow-hidden"><table class="w-full"><thead class="bg-slate-50 border-b"><tr><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Rank</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Player</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Move</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">ELO</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">W</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">L</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">+/-</th></tr></thead><tbody class="divide-y divide-slate-100">${ws.map((s,i)=>`<tr class="hover:bg-slate-50/80 ${i<3?'bg-amber-50/30':''}"><td class="px-6 py-4 text-lg font-bold">${md(i)}</td><td class="px-6 py-4 font-semibold text-slate-700">${s.name}</td><td class="px-6 py-4 text-center">${rankMoveBadge(s.id,i+1,prevT)}</td><td class="px-6 py-4 text-center"><span class="text-lg font-bold text-brand-700">${s.rating}</span></td><td class="px-6 py-4 text-center text-court-700 font-bold">${s.w}</td><td class="px-6 py-4 text-center text-red-500 font-bold">${s.l}</td><td class="px-6 py-4 text-center font-mono ${(s.pf-s.pa)>0?'text-court-700':(s.pf-s.pa)<0?'text-red-500':'text-slate-400'}">${(s.pf-s.pa)>0?'+':''}${s.pf-s.pa}</td></tr>`).join('')}</tbody></table></div>
+  `:`
+    ${(movedUp.length||movedDown.length)?`<div class="flex items-center justify-center gap-4 flex-wrap">${movedUp.length?`<div class="inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl px-4 py-2"><span class="text-green-600 font-bold text-sm">▲ ${movedUp.length} moved up</span><span class="text-xs text-green-500">${movedUp.slice(0,3).map(p=>p.name.split(' ')[0]).join(', ')}${movedUp.length>3?' +more':''}</span></div>`:''}${movedDown.length?`<div class="inline-flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-2"><span class="text-red-600 font-bold text-sm">▼ ${movedDown.length} moved down</span><span class="text-xs text-red-500">${movedDown.slice(0,3).map(p=>p.name.split(' ')[0]).join(', ')}${movedDown.length>3?' +more':''}</span></div>`:''}</div>`:''}
+    ${ps.length>=3?`<div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto"><div class="podium-silver rounded-2xl p-5 text-center mt-8 card-hover cursor-pointer" onclick="showProfile(${ps[1].id})"><div class="flex justify-center mb-1">${avatarHTML(ps[1],'md')}</div><p class="text-3xl">🥈</p><p class="font-bold text-lg mt-2">${ps[1].name}</p><p class="text-2xl font-bold text-slate-600">${ps[1].rating}</p><div class="flex justify-center gap-3 text-sm mt-1"><span class="text-court-600">${ps[1].wins}W</span><span class="text-red-500">${ps[1].losses}L</span></div><div class="mt-1">${rankMoveBadge(ps[1].id,2,prevAll)}</div></div><div class="podium-gold rounded-2xl p-5 text-center card-hover shadow-lg cursor-pointer" onclick="showProfile(${ps[0].id})"><div class="flex justify-center mb-1">${avatarHTML(ps[0],'lg')}</div><p class="text-4xl">🥇</p><p class="font-extrabold text-xl mt-2">${ps[0].name}</p><p class="text-3xl font-extrabold text-amber-600">${ps[0].rating}</p><div class="flex justify-center gap-3 text-sm mt-1"><span class="text-court-600">${ps[0].wins}W</span><span class="text-red-500">${ps[0].losses}L</span></div><div class="mt-1">${rankMoveBadge(ps[0].id,1,prevAll)}</div></div><div class="podium-bronze rounded-2xl p-5 text-center mt-12 card-hover cursor-pointer" onclick="showProfile(${ps[2].id})"><div class="flex justify-center mb-1">${avatarHTML(ps[2],'md')}</div><p class="text-3xl">🥉</p><p class="font-bold text-lg mt-2">${ps[2].name}</p><p class="text-2xl font-bold text-slate-600">${ps[2].rating}</p><div class="flex justify-center gap-3 text-sm mt-1"><span class="text-court-600">${ps[2].wins}W</span><span class="text-red-500">${ps[2].losses}L</span></div><div class="mt-1">${rankMoveBadge(ps[2].id,3,prevAll)}</div></div></div>`:''}
+    <div class="card-glass rounded-2xl shadow-sm overflow-hidden"><table class="w-full"><thead class="bg-slate-50 border-b"><tr><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Rank</th><th class="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Player</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Move</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Rating</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Tier</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">W</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">L</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Played</th><th class="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Win%</th></tr></thead><tbody class="divide-y divide-slate-100">${ps.map((p,i)=>{const t=tier(p.rating),pct=p.matchesPlayed?Math.round(p.wins/p.matchesPlayed*100):0;return`<tr class="hover:bg-slate-50/80 ${i<3?'bg-amber-50/30':''} cursor-pointer" onclick="showProfile(${p.id})"><td class="px-6 py-4 text-lg font-bold">${md(i)}</td><td class="px-6 py-4"><div class="flex items-center gap-2">${avatarHTML(p,'sm')}<span class="font-semibold text-slate-700">${p.name}</span></div></td><td class="px-6 py-4 text-center">${rankMoveBadge(p.id,i+1,prevAll)}</td><td class="px-6 py-4 text-center"><span class="text-xl font-bold text-brand-700">${p.rating}</span></td><td class="px-6 py-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${t.c}">${t.e} ${t.l}</span></td><td class="px-6 py-4 text-center text-court-700 font-bold">${p.wins}</td><td class="px-6 py-4 text-center text-red-500 font-bold">${p.losses}</td><td class="px-6 py-4 text-center text-slate-600">${p.matchesPlayed}</td><td class="px-6 py-4 text-center">${p.matchesPlayed?`<div class="flex items-center justify-center gap-2"><div class="w-16 bg-slate-200 rounded-full h-2"><div class="bg-gradient-to-r from-court-500 to-emerald-400 h-2 rounded-full" style="width:${pct}%"></div></div><span class="text-sm font-medium">${pct}%</span></div>`:'<span class="text-slate-400">—</span>'}</td></tr>`}).join('')}</tbody></table></div>
+  `}</div>`;
+  // Persist current ranks for next comparison
+  saveRanks('all',curAllRanks);
+  if(ws)saveRanks('t_'+lwf,curTRanks);
+}
+
+/* ═══ INIT ═══ */
+(async()=>{try{await openDB();await seed();rNav();await rPage()}catch(e){console.error('Init error:',e);document.getElementById('main-content').innerHTML=`<div class="max-w-2xl mx-auto p-8 text-center"><p class="text-4xl mb-4">⚠️</p><p class="text-lg font-bold text-red-600">Failed to initialize</p><p class="text-sm text-slate-500 mt-2">${e.message}</p><button onclick="indexedDB.deleteDatabase('PTSmashersDB');location.reload()" class="mt-4 bg-red-500 text-white px-6 py-2 rounded-xl font-semibold">Reset Database & Reload</button></div>`}})();
+</script>
+</body>
+</html>
